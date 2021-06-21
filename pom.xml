@@ -45,5 +45,7 @@
     <modules>
         <module>ossp-common</module>
         <module>ossp-gateway</module>
+        <module>ossp-uaa</module>
+        <module>ossp-monitor</module>
     </modules>
 </project>
