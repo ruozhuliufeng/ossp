@@ -1,0 +1,17 @@
+server:
+  port: 88
+spring:
+  cloud:
+    nacos:
+      # 服务发现地址
+      discovery:
+        server-addr: 114.115.167.133:8848
+    gateway:
+      routes:
+        # 用户登录认证
+        - id: auth
+          uri: lb://ossp-uaa
+          predicates:
+            - Path=/uaa/**
+  application:
+    name: ossp-gateway
