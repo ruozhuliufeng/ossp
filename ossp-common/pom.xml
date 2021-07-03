@@ -20,6 +20,11 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.4.1</version>
         </dependency>
+        <!-- MySQL -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
         <!-- 阿里巴巴服务注册中心 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -101,11 +106,16 @@
             <artifactId>javax.interceptor-api</artifactId>
             <version>1.2</version>
         </dependency>
-        <!-- FastJson -->
+        <!-- Druid连接池 -->
         <dependency>
             <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.47</version>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
+        </dependency>
+        <!-- 远程调用 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
     </dependencies>
 </project>

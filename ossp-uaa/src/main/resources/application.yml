@@ -1,0 +1,22 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: ossp-uaa
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/ossp-uaa?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&useSSL=false
+      username: root
+      password: root
+      driver-class-name: com.mysql.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 114.115.167.133:8848
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: ''
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml

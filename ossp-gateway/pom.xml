@@ -19,6 +19,13 @@
             <groupId>cn.aixuxi.ossp</groupId>
             <artifactId>ossp-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <!-- 不需要MP依赖 -->
+                <exclusion>
+                    <groupId>com.baomidou</groupId>
+                    <artifactId>mybatis-plus-boot-starter</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- 网关 -->
         <dependency>
