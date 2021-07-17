@@ -15,6 +15,9 @@
     <packaging>pom</packaging>
 
     <properties>
+        <project.version>1.0-SNAPSHOT</project.version>
+        <spring.cloud.version>Hoxton.SR8</spring.cloud.version>
+        <spring.cloud.alibaba.version>2.2.3.RELEASE</spring.cloud.alibaba.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -85,7 +88,7 @@
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
-                <version>Hoxton.SR8</version>
+                <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -93,10 +96,18 @@
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>2.2.3.RELEASE</version>
+                <version>${spring.cloud.alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!-- 自定义starter -->
+            <dependency>
+                <groupId>cn.aixuxi.ossp.common</groupId>
+                <artifactId>ossp-log-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!-- druid 官方 starter -->
             <dependency>
                 <groupId>com.alibaba</groupId>
