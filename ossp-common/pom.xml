@@ -9,7 +9,6 @@
     </parent>
     <groupId>cn.aixuxi.ossp</groupId>
     <artifactId>ossp-common</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>ossp-common</name>
     <description>ossp通用工具</description>
     <packaging>pom</packaging>

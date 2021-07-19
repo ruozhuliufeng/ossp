@@ -5,12 +5,11 @@
     <parent>
         <artifactId>ossp-common</artifactId>
         <groupId>cn.aixuxi.ossp</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.aixuxi.ossp.common</groupId>
     <artifactId>ossp-log-spring-boot-starter</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>ossp-log-spring-boot-starter</name>
     <packaging>jar</packaging>
     <description>日志通用模块组件</description>

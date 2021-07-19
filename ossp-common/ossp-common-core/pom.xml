@@ -5,12 +5,11 @@
     <parent>
         <artifactId>ossp-common</artifactId>
         <groupId>cn.aixuxi.ossp</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.aixuxi.ossp.common</groupId>
     <artifactId>ossp-common-core</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>ossp-common-core</name>
     <description>公共通用组件</description>
     <packaging>jar</packaging>
