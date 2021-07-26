@@ -14,15 +14,8 @@
     <description>OSSP 配置文件中心</description>
     <dependencies>
         <dependency>
-            <groupId>cn.aixuxi.ossp</groupId>
-            <artifactId>ossp-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.baomidou</groupId>
-                    <artifactId>mybatis-plus-boot-starter</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
     </dependencies>
 

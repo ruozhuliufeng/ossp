@@ -107,6 +107,16 @@
                 <artifactId>ossp-log-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.aixuxi.ossp.common</groupId>
+                <artifactId>ossp-redis-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.aixuxi.ossp.common</groupId>
+                <artifactId>ossp-common-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- druid 官方 starter -->
             <dependency>

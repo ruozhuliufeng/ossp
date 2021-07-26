@@ -15,113 +15,15 @@
 
     <!-- 通用工具模块 -->
     <modules>
+        <!-- 核心工具模块 -->
         <module>ossp-common-core</module>
+        <!-- 日志工具模块 -->
         <module>ossp-log-spring-boot-starter</module>
+        <!-- Redis工具模块 -->
+        <module>ossp-redis-spring-boot-starter</module>
+        <!-- 限流、熔断工具模块 -->
+        <module>ossp-sentinel-spring-boot-starter</module>
+        <!-- 客户端认证、授权工具模块 -->
+        <module>ossp-auth-client-spring-boot-starter</module>
     </modules>
-
-<!--    <dependencies>-->
-<!--        &lt;!&ndash; ORM &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.baomidou</groupId>-->
-<!--            <artifactId>mybatis-plus-boot-starter</artifactId>-->
-<!--            <version>3.4.1</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; MySQL &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>mysql</groupId>-->
-<!--            <artifactId>mysql-connector-java</artifactId>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; 阿里巴巴服务注册中心 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; 阿里巴巴服务配置中心 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; 引入Sentinel流量控制 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash; 引入actuator进行统计 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
-<!--        </dependency>-->
-
-<!--        &lt;!&ndash; Redis相关 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-data-redis</artifactId>-->
-<!--            &lt;!&ndash; 切换使用jedis操作Redis &ndash;&gt;-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>io.lettuce</groupId>-->
-<!--                    <artifactId>lettuce-core</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; 引入Jedis &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>redis.clients</groupId>-->
-<!--            <artifactId>jedis</artifactId>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; 引入Redisson，使用Redission作为所有的分布式锁，分布式对象等功能框架 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.redisson</groupId>-->
-<!--            <artifactId>redisson</artifactId>-->
-<!--            <version>3.12.0</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; Lombok &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.projectlombok</groupId>-->
-<!--            <artifactId>lombok</artifactId>-->
-<!--            <version>1.18.20</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; hutool工具类 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>cn.hutool</groupId>-->
-<!--            <artifactId>hutool-all</artifactId>-->
-<!--            <version>5.6.6</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; FastJSON依赖 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>fastjson</artifactId>-->
-<!--            <version>1.2.72</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; 引入邮箱依赖 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>javax.mail</groupId>-->
-<!--            <artifactId>mail</artifactId>-->
-<!--            <version>1.4.7</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; Servlet &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>javax.servlet</groupId>-->
-<!--            <artifactId>javax.servlet-api</artifactId>-->
-<!--            <version>3.1.0</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>javax.interceptor</groupId>-->
-<!--            <artifactId>javax.interceptor-api</artifactId>-->
-<!--            <version>1.2</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; Druid连接池 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.alibaba</groupId>-->
-<!--            <artifactId>druid-spring-boot-starter</artifactId>-->
-<!--            <version>1.2.5</version>-->
-<!--        </dependency>-->
-<!--        &lt;!&ndash; 远程调用 &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.cloud</groupId>-->
-<!--            <artifactId>spring-cloud-starter-openfeign</artifactId>-->
-<!--        </dependency>-->
-<!--    </dependencies>-->
 </project>
