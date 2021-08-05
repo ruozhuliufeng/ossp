@@ -18,7 +18,7 @@ import java.util.Date;
  */
 @Getter
 @Setter
-public class BaseEntity<T extends Model<?>> extends Model<T> {
+public class BaseEntity<T extends Model<?>> extends Model<T> implements Serializable{
 
     /**
      * 主键id，自增

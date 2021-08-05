@@ -3,7 +3,6 @@ package cn.aixuxi.ossp.common.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.collections4.bag.HashBag;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.social.security.SocialUserDetails;
@@ -26,11 +25,9 @@ public class LoginAppUser extends SysUser implements SocialUserDetails {
     // 权限列表
     private Set<String> permissions;
 
-    @Override
-    public String getUserId() {
-        return getOpenId();
-    }
-
+    /**
+     * 权限重写
+     */
     @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -60,5 +57,10 @@ public class LoginAppUser extends SysUser implements SocialUserDetails {
     @Override
     public boolean isEnabled() {
         return getEnabled();
+    }
+
+    @Override
+    public String getUserId() {
+        return getOpenId();
     }
 }
