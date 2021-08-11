@@ -117,6 +117,16 @@
                 <artifactId>ossp-common-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.aixuxi.ossp.common</groupId>
+                <artifactId>ossp-auth-client-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.aixuxi.ossp.sentinel</groupId>
+                <artifactId>ossp-sentinel-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!-- druid 官方 starter -->
             <dependency>
@@ -343,6 +353,8 @@
         <module>ossp-uaa</module>
         <!-- 监控 -->
         <module>ossp-monitor</module>
+        <!-- 基于xxl-job的分布式任务调度平台 -->
+        <module>ossp-job</module>
     </modules>
 
     <licenses>
