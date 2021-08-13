@@ -1,14 +1,17 @@
 package cn.aixuxi.ossp.auth.client.store;
 
 import cn.aixuxi.ossp.auth.client.properties.SecurityPropertis;
+import cn.aixuxi.ossp.common.constant.SecurityConstants;
 import org.springframework.cglib.core.ReflectUtils;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.OAuth2Request;
 import org.springframework.security.oauth2.provider.token.AuthenticationKeyGenerator;
 import org.springframework.security.oauth2.provider.token.DefaultAuthenticationKeyGenerator;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -19,7 +22,7 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Method;
-import java.util.Collection;
+import java.util.*;
 
 /**
  * 优化自Spring Security的{@link org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore}
@@ -181,23 +184,57 @@ public class CustomRedisTokenStore implements TokenStore {
     }
 
     @Override
-    public OAuth2Authentication readAuthentication(OAuth2AccessToken oAuth2AccessToken) {
-        return null;
+    public OAuth2Authentication readAuthentication(OAuth2AccessToken token) {
+        OAuth2Authentication auth2Authentication = readAuthentication(token.getValue());
+        // 是否开启token续签
+        boolean isRenew = securityPropertis.getAuth().getRenew().getEnable();
+        if (isRenew && auth2Authentication != null){
+            OAuth2Request clientAuth = auth2Authentication.getOAuth2Request();
+            // 判断当前应用是否需要自动续签
+            if (checkRenewClientId(clientAuth.getClientId())){
+                // 读取过期时长
+                int validitySeconds = getAccessTokenValiditySeconds(clientAuth.getClientId());
+                if (validitySeconds > 0){
+                    double expiresRatio = token.getExpiresIn() / (double)validitySeconds;
+                    // 判断是否需要续签，当前剩余时间小于过期时长的50%则续签(配置文件中配置)
+                    if (expiresRatio <= securityPropertis.getAuth().getRenew().getTimeRatio()){
+                        // 更新AccessToken过期时间
+                        DefaultOAuth2AccessToken oAuth2AccessToken = (DefaultOAuth2AccessToken) token;
+                        oAuth2AccessToken.setExpiration(new Date(System.currentTimeMillis() + (validitySeconds * 1000L)));;
+                        // 更新AccessToken
+                        storeAccessToken(oAuth2AccessToken,auth2Authentication,true);
+                    }
+                }
+            }
+        }
+        return auth2Authentication;
+    }
+
+
+
+
+    @Override
+    public OAuth2Authentication readAuthentication(String token) {
+        byte[] bytes;
+        try (RedisConnection conn = getConnection()) {
+            bytes = conn.get(serializeKey(SecurityConstants.REDIS_TOKEN_AUTH + token));
+        }
+        return deserializeAuthentication(bytes);
     }
 
     @Override
-    public OAuth2Authentication readAuthentication(String s) {
-        return null;
+    public void storeAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
+        storeAccessToken(token,authentication,false);
     }
 
     @Override
-    public void storeAccessToken(OAuth2AccessToken oAuth2AccessToken, OAuth2Authentication oAuth2Authentication) {
-
-    }
-
-    @Override
-    public OAuth2AccessToken readAccessToken(String s) {
-        return null;
+    public OAuth2AccessToken readAccessToken(String tokenValue) {
+        byte[] key = serializeKey(ACCESS+tokenValue);
+        byte[] bytes;
+        try(RedisConnection conn = getConnection()){
+            bytes = conn.get(key);
+        }
+        return deserializeAccessToken(bytes);
     }
 
     @Override
@@ -211,14 +248,23 @@ public class CustomRedisTokenStore implements TokenStore {
     }
 
     @Override
-    public OAuth2RefreshToken readRefreshToken(String s) {
+    public OAuth2RefreshToken readRefreshToken(String token) {
         return null;
     }
 
     @Override
-    public OAuth2Authentication readAuthenticationForRefreshToken(OAuth2RefreshToken oAuth2RefreshToken) {
-        return null;
+    public OAuth2Authentication readAuthenticationForRefreshToken(OAuth2RefreshToken token) {
+        return readAuthenticationForRefreshToken(token.getValue());
     }
+
+    public OAuth2Authentication readAuthenticationForRefreshToken(String token) {
+        try (RedisConnection conn = getConnection()) {
+            byte[] bytes;
+            bytes = conn.get(serializeKey(REFRESH_AUTH+token));
+            return deserializeAuthentication(bytes);
+        }
+    }
+
 
     @Override
     public void removeRefreshToken(OAuth2RefreshToken oAuth2RefreshToken) {
@@ -233,12 +279,91 @@ public class CustomRedisTokenStore implements TokenStore {
 
 
     @Override
-    public Collection<OAuth2AccessToken> findTokensByClientIdAndUserName(String s, String s1) {
-        return null;
+    public Collection<OAuth2AccessToken> findTokensByClientIdAndUserName(String clientId, String userName) {
+        byte[] key = serializeKey(SecurityConstants.REDIS_UNAME_TO_ACCESS+getApprovalKey(clientId,userName));
+        List<byte[]> byteList;
+        try(RedisConnection conn = getConnection()) {
+            byteList = conn.lRange(key,0,-1);
+        }
+        return getTokenCollections(byteList);
     }
 
+
+
     @Override
-    public Collection<OAuth2AccessToken> findTokensByClientId(String s) {
-        return null;
+    public Collection<OAuth2AccessToken> findTokensByClientId(String clientId) {
+        byte[] key = serializeKey(SecurityConstants.REDIS_CLIENT_ID_TO_ACCESS+clientId);
+        List<byte[]> byteList;
+        try(RedisConnection conn = getConnection()) {
+            byteList = conn.lRange(key,0,-1);
+        }
+        return getTokenCollections(byteList);
+    }
+
+
+
+    /**
+     * 判断应用自动续签是否满足黑名单和白名单的过滤逻辑
+     * @param clientId 应用id
+     * @return 是否符合条件
+     */
+    private boolean checkRenewClientId(String clientId) {
+        boolean result = true;
+        // 白名单
+        List<String> includeClientIds = securityPropertis.getAuth().getRenew().getIncludeClientIds();
+        // 黑名单
+        List<String> exclusiveClientIds = securityPropertis.getAuth().getRenew().getExclusiveClientIds();
+        if (includeClientIds.size()>0){
+            result = includeClientIds.contains(clientId);
+        }else if (exclusiveClientIds.size()>0){
+            result = !exclusiveClientIds.contains(clientId);
+        }
+        return result;
+    }
+
+    /**
+     * 获取token的剩余有效时长
+     * @param clientId 应用id
+     * @return
+     */
+    private int getAccessTokenValiditySeconds(String clientId) {
+        byte[] bytes;
+        try (RedisConnection conn = getConnection()) {
+            bytes = conn.get(serializeKey(SecurityConstants.CACHE_CLIENT_KEY + ":" + clientId));
+        }
+        if (bytes != null){
+            ClientDetails clientDetails = deserializeClientDetails(bytes);
+            if (clientDetails.getAccessTokenValiditySeconds() != null){
+                return clientDetails.getAccessTokenValiditySeconds();
+            }
+        }
+        // 返回默认值
+        return SecurityConstants.ACCESS_TOKEN_VALIDITY_SECONDS;
+    }
+
+    /**
+     * 存储token
+     * @param token 访问令牌
+     * @param authentication 身份信息
+     * @param isRenew 是否续签
+     */
+    private void storeAccessToken(OAuth2AccessToken token,OAuth2Authentication authentication,boolean isRenew){
+
+    }
+
+    private Collection<OAuth2AccessToken> getTokenCollections(List<byte[]> byteList) {
+        if (byteList == null || byteList.size() == 0){
+            return Collections.emptySet();
+        }
+        List<OAuth2AccessToken> accessTokens = new ArrayList<>(byteList.size());
+        for (byte[] bytes:byteList){
+            OAuth2AccessToken accessToken = deserializeAccessToken(bytes);
+            accessTokens.add(accessToken);
+        }
+        return Collections.unmodifiableCollection(accessTokens);
+    }
+
+    private String getApprovalKey(String clientId, String userName) {
+        return clientId + (userName == null ? "" :":"+userName);
     }
 }
