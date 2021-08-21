@@ -26,5 +26,9 @@
         <module>ossp-sentinel-spring-boot-starter</module>
         <!-- 客户端认证、授权工具模块 -->
         <module>ossp-auth-client-spring-boot-starter</module>
+        <!-- ES搜索通用模块 -->
+        <module>ossp-elasticsearch-spring-boot-starter</module>
+        <!-- 公共字段填充 -->
+        <module>ossp-db-spring-boot-starter</module>
     </modules>
 </project>

@@ -1,4 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.aixuxi.ossp.redis.RedisAutoConfigure,\
-cn.aixuxi.ossp.redis.lock.RedissonDistributedLock,\
-cn.aixuxi.ossp.redis.template.RedisRepository
+cn.aixuxi.ossp.common.db.config.TenantAutoConfigure,\
+cn.aixuxi.ossp.common.db.config.MybatisPlusAutoConfigure

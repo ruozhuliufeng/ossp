@@ -49,9 +49,9 @@
     </properties>
 
     <modules>
-        <module>job-admin</module>
-        <module>job-core</module>
-        <module>job-executor-samples</module>
+        <module>ossp-job-admin</module>
+        <module>ossp-job-core</module>
+        <module>ossp-job-executor-samples</module>
     </modules>
 
     <profiles>

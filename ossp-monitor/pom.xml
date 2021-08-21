@@ -15,7 +15,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>log-center</module>
+        <module>ossp-log-center</module>
         <module>ossp-admin</module>
     </modules>
 </project>

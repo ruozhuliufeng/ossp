@@ -345,6 +345,8 @@
 
     <!-- 模块 -->
     <modules>
+        <!-- 配置汇总新 -->
+        <module>ossp-config</module>
         <!-- 公共模块 -->
         <module>ossp-common</module>
         <!-- 网关 -->
