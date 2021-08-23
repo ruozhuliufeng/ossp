@@ -367,6 +367,8 @@
         <module>ossp-monitor</module>
         <!-- 基于xxl-job的分布式任务调度平台 -->
         <module>ossp-job</module>
+        <!-- 业务处理模块 -->
+        <module>ossp-business</module>
     </modules>
 
     <licenses>
