@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>ossp-common</artifactId>
+        <groupId>cn.aixuxi.ossp</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>cn.aixuxi.ossp.common</groupId>
+    <artifactId>ossp-common-spring-boot-starter</artifactId>
+    <name>ossp-common-spring-boot-starter</name>
+    <description>OSSP 通用组件</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>cn.aixuxi.ossp.common</groupId>
+            <artifactId>ossp-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+</project>

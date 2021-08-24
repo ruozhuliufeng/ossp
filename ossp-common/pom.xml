@@ -18,6 +18,8 @@
     <modules>
         <!-- 核心工具模块 -->
         <module>ossp-common-core</module>
+        <!-- 通用工具模块 -->
+        <module>ossp-common-spring-boot-starter</module>
         <!-- 日志工具模块 -->
         <module>ossp-log-spring-boot-starter</module>
         <!-- Redis工具模块 -->
@@ -30,5 +32,7 @@
         <module>ossp-elasticsearch-spring-boot-starter</module>
         <!-- 公共字段填充 -->
         <module>ossp-db-spring-boot-starter</module>
+        <!-- Swagger -->
+        <module>ossp-swagger2-spring-boot-starter</module>
     </modules>
 </project>
