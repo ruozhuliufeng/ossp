@@ -9,7 +9,6 @@
     </parent>
     <groupId>cn.aixuxi.ossp</groupId>
     <artifactId>ossp-uaa</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>ossp-uaa</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -18,9 +17,8 @@
     <dependencies>
         <!-- 引入通用工具依赖 -->
         <dependency>
-            <groupId>cn.aixuxi.ossp</groupId>
-            <artifactId>ossp-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <groupId>cn.aixuxi.ossp.common</groupId>
+            <artifactId>ossp-common-core</artifactId>
         </dependency>
         <!-- Web核心 -->
         <dependency>
