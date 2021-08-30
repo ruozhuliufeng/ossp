@@ -6,13 +6,11 @@
         <groupId>cn.aixuxi.ossp</groupId>
         <artifactId>ossp-business</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.aixuxi.ossp.business</groupId>
-    <artifactId>user-center</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>user-center</name>
-    <description>OSSP 用户处理中心</description>
+    <artifactId>ossp-file-center</artifactId>
+    <name>ossp-file-center</name>
+    <description>OSSP 文件处理中心</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>

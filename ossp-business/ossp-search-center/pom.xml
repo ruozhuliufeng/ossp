@@ -7,17 +7,16 @@
         <artifactId>ossp</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>cn.aixuxi.ossp</groupId>
-    <artifactId>ossp-business</artifactId>
+    <groupId>cn.aixuxi.ossp.business</groupId>
+    <artifactId>ossp-search-center</artifactId>
+    <name>ossp-search-center</name>
+    <description>OSSP 搜索中心</description>
+
     <packaging>pom</packaging>
-    <name>ossp-business</name>
-    <description>OSSP 业务处理模块</description>
 
     <modules>
-        <!-- 用户处理中心 -->
-        <module>ossp-user-center</module>
-        <!-- 文件处理中心 -->
-        <module>ossp-file-center</module>
+        <module>ossp-search-client</module>
+        <module>ossp-search-server</module>
     </modules>
 
 </project>

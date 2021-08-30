@@ -138,6 +138,31 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>cn.aixuxi.ossp</groupId>
+                <artifactId>ossp-config</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.aixuxi.ossp.ribbon</groupId>
+                <artifactId>ossp-ribbon-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.aixuxi.ossp.common</groupId>
+                <artifactId>ossp-common-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.aixuxi.ossp.common</groupId>
+                <artifactId>ossp-db-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.aixuxi.ossp.common</groupId>
+                <artifactId>ossp-swagger2-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- druid 官方 starter -->
             <dependency>
                 <groupId>com.alibaba</groupId>

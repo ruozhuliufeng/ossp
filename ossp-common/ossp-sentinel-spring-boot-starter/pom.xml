@@ -6,7 +6,6 @@
         <artifactId>ossp-common</artifactId>
         <groupId>cn.aixuxi.ossp</groupId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>cn.aixuxi.ossp.sentinel</groupId>
     <artifactId>ossp-sentinel-spring-boot-starter</artifactId>
