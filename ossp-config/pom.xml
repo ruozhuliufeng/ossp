@@ -9,7 +9,6 @@
     </parent>
     <groupId>cn.aixuxi.ossp</groupId>
     <artifactId>ossp-config</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>ossp-config</name>
     <description>OSSP 配置文件中心</description>
     <dependencies>

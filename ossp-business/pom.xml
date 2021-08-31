@@ -18,6 +18,8 @@
         <module>ossp-user-center</module>
         <!-- 文件处理中心 -->
         <module>ossp-file-center</module>
+        <!-- 数据搜索中心 -->
+        <module>ossp-search-center</module>
     </modules>
 
 </project>

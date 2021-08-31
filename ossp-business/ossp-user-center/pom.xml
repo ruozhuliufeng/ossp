@@ -10,7 +10,6 @@
     </parent>
     <groupId>cn.aixuxi.ossp.business</groupId>
     <artifactId>ossp-user-center</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>ossp-user-center</name>
     <description>OSSP 用户处理中心</description>
     <properties>
