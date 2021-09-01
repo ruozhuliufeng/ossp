@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.aixuxi.ossp.common.swagger.SwaggerAutoConfiguration
+cn.aixuxi.ossp.common.zookeeper.ZookeeperAutoConfiguration
