@@ -36,5 +36,7 @@
         <module>ossp-db-spring-boot-starter</module>
         <!-- Swagger -->
         <module>ossp-swagger2-spring-boot-starter</module>
+        <!-- Zookeeper通用模块 -->
+        <module>ossp-zookeeper-spring-boot-starter</module>
     </modules>
 </project>

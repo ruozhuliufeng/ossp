@@ -4,6 +4,8 @@ import com.alibaba.ttl.TransmittableThreadLocal;
 
 /**
  * 租户holder
+ * @author ruozhuliufeng
+ * @date 2021-09-01
  */
 public class TenantContextHolder {
     /**
