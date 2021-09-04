@@ -163,6 +163,16 @@
                 <artifactId>ossp-swagger2-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.aixuxi.ossp.search</groupId>
+                <artifactId>ossp-search-client</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.aixuxi.ossp.common</groupId>
+                <artifactId>ossp-elasticsearch-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <!-- druid 官方 starter -->
             <dependency>
                 <groupId>com.alibaba</groupId>

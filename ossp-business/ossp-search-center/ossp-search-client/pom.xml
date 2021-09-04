@@ -10,30 +10,20 @@
     <groupId>cn.aixuxi.ossp.search</groupId>
     <artifactId>ossp-search-client</artifactId>
     <name>ossp-search-client</name>
+    <packaging>jar</packaging>
     <description>OSSP 搜索客户端</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <groupId>cn.aixuxi.ossp.ribbon</groupId>
+            <artifactId>ossp-ribbon-spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>cn.aixuxi.ossp.sentinel</groupId>
+            <artifactId>ossp-sentinel-spring-boot-starter</artifactId>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>
