@@ -137,6 +137,11 @@
                 <artifactId>ossp-sentinel-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>cn.aixuxi.ossp.sentinel</groupId>
+                <artifactId>ossp-oss-spring-boot-starter</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>cn.aixuxi.ossp</groupId>
