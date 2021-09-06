@@ -7,7 +7,7 @@
         <groupId>cn.aixuxi.ossp</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>cn.aixuxi.ossp.ribbon</groupId>
+    <groupId>cn.aixuxi.ossp.common</groupId>
     <artifactId>ossp-ribbon-spring-boot-starter</artifactId>
     <name>ossp-ribbon-spring-boot-starter</name>
     <description>OSSP 远程通信通用组件</description>

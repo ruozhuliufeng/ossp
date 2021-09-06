@@ -34,11 +34,11 @@
             <artifactId>ossp-redis-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.aixuxi.ossp.ribbon</groupId>
+            <groupId>cn.aixuxi.ossp.common</groupId>
             <artifactId>ossp-ribbon-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
-            <groupId>cn.aixuxi.ossp.sentinel</groupId>
+            <groupId>cn.aixuxi.ossp.common</groupId>
             <artifactId>ossp-sentinel-spring-boot-starter</artifactId>
         </dependency>
         <dependency>

@@ -7,7 +7,7 @@
         <groupId>cn.aixuxi.ossp</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <groupId>cn.aixuxi.ossp.sentinel</groupId>
+    <groupId>cn.aixuxi.ossp.common</groupId>
     <artifactId>ossp-sentinel-spring-boot-starter</artifactId>
     <name>ossp-sentinel-spring-boot-starter</name>
     <description>OSSP服务降级、限流、熔断组件</description>
