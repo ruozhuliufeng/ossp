@@ -80,7 +80,7 @@ public class AuthUtils {
      * @param header 请求参数
      * @return
      */
-    private static String[] extractHeaderClient(String header) {
+    public static String[] extractHeaderClient(String header) {
         byte[] base64Client = header.substring(BASIC_.length()).getBytes(StandardCharsets.UTF_8);
         byte[] decoded = Base64.getDecoder().decode(base64Client);
         String clientStr = new String(decoded,StandardCharsets.UTF_8);
@@ -91,7 +91,7 @@ public class AuthUtils {
         return clientArr;
     }
 
-    private static String getUsername(Authentication authentication){
+    public static String getUsername(Authentication authentication){
         Object principal = authentication.getPrincipal();
         String username = null;
         if (principal instanceof SysUser){
