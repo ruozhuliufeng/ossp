@@ -106,7 +106,7 @@ public class S3Template implements InitializingBean {
         delete(properties.getS3().getBucketName(), objectName);
     }
 
-    private void delete(String bucketName, String objectName) {
+    public void delete(String bucketName, String objectName) {
         amazonS3.deleteObject(bucketName, objectName);
     }
 
@@ -137,7 +137,7 @@ public class S3Template implements InitializingBean {
      * @param os         输出流
      */
     @SneakyThrows
-    private void out(String bucketName, String objectName, OutputStream os) {
+    public void out(String bucketName, String objectName, OutputStream os) {
         S3Object s3Object = amazonS3.getObject(bucketName, objectName);
         try (
                 S3ObjectInputStream s3is = s3Object.getObjectContent();
