@@ -71,6 +71,14 @@ public class OidcIdTokenBuilder {
     }
 
     /**
+     * 赋值issuer {@link OidcIdTokenBuilder}
+     * @param issuer issuer
+     * @return OidcIdTokenBuilder
+     */
+    public OidcIdTokenBuilder issuer(String issuer){
+        return this.claim(ISS,issuer);
+    }
+    /**
      * 赋值 {@link OidcIdTokenBuilder}
      * @param nonce nonce
      * @return OidcIdTokenBuilder

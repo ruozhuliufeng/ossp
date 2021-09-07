@@ -6,12 +6,15 @@ import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.DefaultSecurityFilterChain;
+import org.springframework.stereotype.Component;
 
 /**
+ * mobile的相关处理配置
  * @author ruozhuliufeng
  * @version 1.0
  * @date 2021-09-06 17:26
  **/
+@Component
 public class MobileAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
     @Autowired
     private OsspUserDetailsService userDetailsService;

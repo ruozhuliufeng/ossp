@@ -14,9 +14,11 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import jodd.cli.Cli;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.MapUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,8 @@ import java.util.Map;
  * @version 1.0
  * @date 2021-09-06 13:19
  **/
+@Slf4j
+@Service
 public class ClientServiceImpl extends SuperServiceImpl<ClientMapper, Client>
         implements IClientService {
     private final static String LOCK_KEY_CLIENTID = "clientId:";
