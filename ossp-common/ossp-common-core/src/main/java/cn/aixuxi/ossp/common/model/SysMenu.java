@@ -80,5 +80,5 @@ public class SysMenu extends BaseEntity{
      * 菜单集合
      */
     @TableField(exist = false)
-    private Set<String> menuIds;
+    private Set<Long> menuIds;
 }
