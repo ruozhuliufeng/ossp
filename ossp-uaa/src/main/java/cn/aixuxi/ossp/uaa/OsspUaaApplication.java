@@ -1,6 +1,6 @@
 package cn.aixuxi.ossp.uaa;
 
-import cn.aixuxi.ossp.ribbon.annotation.EnableFeignInterceptor;
+import cn.aixuxi.ossp.common.ribbon.annotation.EnableFeignInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;

@@ -1,1 +1,1 @@
-logTrace=cn.aixuxi.ossp.log.trace.DubboTraceFilter
+logTrace=DubboTraceFilter
