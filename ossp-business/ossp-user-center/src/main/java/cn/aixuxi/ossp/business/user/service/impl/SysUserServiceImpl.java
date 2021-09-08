@@ -5,6 +5,8 @@ import cn.aixuxi.ossp.business.user.model.SysUserExcel;
 import cn.aixuxi.ossp.business.user.service.ISysUserService;
 import cn.aixuxi.ossp.common.model.*;
 import cn.aixuxi.ossp.common.service.impl.SuperServiceImpl;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,8 @@ import java.util.Set;
  * @version 1.0
  * @date 2021-09-03 15:30
  **/
+@Slf4j
+@Service
 public class SysUserServiceImpl extends SuperServiceImpl<SysUserMapper, SysUser>
                                 implements ISysUserService {
     /**
