@@ -409,6 +409,8 @@
         <module>ossp-job</module>
         <!-- 业务处理模块 -->
         <module>ossp-business</module>
+        <!-- 事务 -->
+        <module>ossp-transaction</module>
     </modules>
 
     <licenses>
