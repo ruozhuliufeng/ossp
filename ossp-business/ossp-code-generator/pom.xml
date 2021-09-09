@@ -8,14 +8,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <groupId>cn.aixuxi.ossp.business</groupId>
-    <artifactId>ossp-user-center</artifactId>
-    <name>ossp-user-center</name>
-    <description>OSSP 用户处理中心</description>
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+    <artifactId>ossp-code-generator</artifactId>
+    <name>ossp-code-generator</name>
+    <description>OSSP 代码生成</description>
     <dependencies>
-        <!-- 公共实体类模块 -->
         <dependency>
             <groupId>cn.aixuxi.ossp</groupId>
             <artifactId>ossp-config</artifactId>
@@ -30,55 +26,39 @@
         </dependency>
         <dependency>
             <groupId>cn.aixuxi.ossp.common</groupId>
-            <artifactId>ossp-redis-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.aixuxi.ossp.common</groupId>
-            <artifactId>ossp-ribbon-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.aixuxi.ossp.common</groupId>
-            <artifactId>ossp-sentinel-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.aixuxi.ossp.common</groupId>
             <artifactId>ossp-swagger2-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>cn.aixuxi.ossp.search</groupId>
-            <artifactId>ossp-search-client</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.apache.velocity</groupId>
+            <artifactId>velocity</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-configuration2</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.social</groupId>
-            <artifactId>spring-social-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
         </dependency>
     </dependencies>
 
@@ -123,5 +103,4 @@
         </plugins>
         <finalName>${project.artifactId}</finalName>
     </build>
-
 </project>
