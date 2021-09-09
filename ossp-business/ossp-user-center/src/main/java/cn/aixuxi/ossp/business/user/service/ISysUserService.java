@@ -57,7 +57,7 @@ public interface ISysUserService extends ISuperService<SysUser> {
      * @param openId openId
      * @return 系统用户信息
      */
-    SysUser selectOpenId(String openId);
+    SysUser selectByOpenId(String openId);
 
     /**
      * 用户分配角色
@@ -107,7 +107,7 @@ public interface ISysUserService extends ISuperService<SysUser> {
      * @param params 参数
      * @return 导出用户集合
      */
-    List<SysUserExcel> findAllUser(Map<String, Object> params);
+    List<SysUserExcel> findAllUsers(Map<String, Object> params);
 
     /**
      * 保存或更新用户信息

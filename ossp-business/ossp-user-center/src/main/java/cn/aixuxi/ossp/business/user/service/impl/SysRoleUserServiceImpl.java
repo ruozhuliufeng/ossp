@@ -64,7 +64,7 @@ public class SysRoleUserServiceImpl extends SuperServiceImpl<SysUserRoleMapper, 
      * @return 角色集合
      */
     @Override
-    public List<SysRole> findROlesByUserIds(List<Long> userIds) {
-        return sysUserRoleMapper.findROlesByUserIds(userIds);
+    public List<SysRole> findRolesByUserIds(List<Long> userIds) {
+        return sysUserRoleMapper.findRolesByUserIds(userIds);
     }
 }

@@ -4,14 +4,21 @@
 <mapper namespace="cn.aixuxi.ossp.business.user.mapper.SysUserRoleMapper">
 
     <delete id="deleteUserRole">
-        DELETE FROM sys_role_user
+        delete from sys_role_user
         <where>
             <if test="userId != null">
-                AND user_id = #{userId}
+                and user_id = #{userId}
             </if>
             <if test="roleId != null">
-                AND role_id = #{roleId}
+                and role_id = #{roleId}
             </if>
         </where>
     </delete>
+
+    <select id="findRolesByUserId" resultType="cn.aixuxi.ossp.common.model.SysRole">
+        select r.*
+        from sys_role r
+        inner join sys_role_user ru on r.id = ru.role_id and ru.user_id = #{userId}
+    </select>
+
 </mapper>

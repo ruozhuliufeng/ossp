@@ -41,5 +41,5 @@ public interface ISysRoleUserService extends ISuperService<SysRoleUser> {
      * @param userIds 用户id集合
      * @return 角色集合
      */
-    List<SysRole> findROlesByUserIds(List<Long> userIds);
+    List<SysRole> findRolesByUserIds(List<Long> userIds);
 }
