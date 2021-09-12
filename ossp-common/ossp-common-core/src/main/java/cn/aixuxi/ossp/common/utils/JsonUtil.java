@@ -1,5 +1,6 @@
 package cn.aixuxi.ossp.common.utils;
 
+import cn.aixuxi.ossp.common.constant.CommonConstant;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.json.JsonReadFeature;

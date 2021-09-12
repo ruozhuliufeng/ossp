@@ -26,7 +26,7 @@ public class TenantAuthenticationSecurityConfig extends SecurityConfigurerAdapte
     @Override
     public void configure(HttpSecurity http) throws Exception {
         TenantAuthenticationProvider provider = new TenantAuthenticationProvider();
-        provider.setUserDetailsPasswordService(userDetailsService);
+        provider.setUserDetailsService(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder);
         http.authenticationProvider(provider);
     }

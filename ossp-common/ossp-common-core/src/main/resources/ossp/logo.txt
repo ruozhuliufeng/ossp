@@ -1,26 +1,11 @@
-
-
-
-     OOOOOOOOO        SSSSSSSSSSSSSSS   SSSSSSSSSSSSSSS PPPPPPPPPPPPPPPPP
-   OO:::::::::OO    SS:::::::::::::::SSS:::::::::::::::SP::::::::::::::::P
- OO:::::::::::::OO S:::::SSSSSS::::::S:::::SSSSSS::::::SP::::::PPPPPP:::::P
-O:::::::OOO:::::::OS:::::S     SSSSSSS:::::S     SSSSSSSPP:::::P     P:::::P
-O::::::O   O::::::OS:::::S           S:::::S              P::::P     P:::::P
-O:::::O     O:::::OS:::::S           S:::::S              P::::P     P:::::P
-O:::::O     O:::::O S::::SSSS         S::::SSSS           P::::PPPPPP:::::P
-O:::::O     O:::::O  SS::::::SSSSS     SS::::::SSSSS      P:::::::::::::PP
-O:::::O     O:::::O    SSS::::::::SS     SSS::::::::SS    P::::PPPPPPPPP
-O:::::O     O:::::O       SSSSSS::::S       SSSSSS::::S   P::::P
-O:::::O     O:::::O            S:::::S           S:::::S  P::::P
-O::::::O   O::::::O            S:::::S           S:::::S  P::::P
-O:::::::OOO:::::::OSSSSSSS     S:::::SSSSSSS     S:::::SPP::::::PP
- OO:::::::::::::OO S::::::SSSSSS:::::S::::::SSSSSS:::::SP::::::::P
-   OO:::::::::OO   S:::::::::::::::SSS:::::::::::::::SS P::::::::P
-     OOOOOOOOO      SSSSSSSSSSSSSSS   SSSSSSSSSSSSSSS   PPPPPPPPPP
-
-
-
-                    OSSP-一站式服务平台，致力于解决方案
+ _______  _______  _______  _______
+|       ||       ||       ||       |
+|   _   ||  _____||  _____||    _  |
+|  | |  || |_____ | |_____ |   |_| |
+|  |_|  ||_____  ||_____  ||    ___|
+|       | _____| | _____| ||   |
+|_______||_______||_______||___|
+  OSSP-一站式服务平台，致力于解决方案
 
 
 

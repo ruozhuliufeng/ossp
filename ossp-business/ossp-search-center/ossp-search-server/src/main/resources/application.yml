@@ -1,9 +1,9 @@
 spring:
   elasticsearch:
     rest:
-      uris: ${zlt.elasticsearch.uris}
-      username: ${zlt.elasticsearch.username}
-      password: ${zlt.elasticsearch.password}
+      uris: ${ossp.elasticsearch.uris}
+      username: ${ossp.elasticsearch.username}
+      password: ${ossp.elasticsearch.password}
 
 ossp:
   indices:
@@ -13,4 +13,4 @@ ossp:
     title: 搜索中心
     description: 搜索中心接口文档
     version: 1.0
-    base-package: com.central.search.controller
+    base-package: cn.aixuxi.ossp.search.server.search.controller

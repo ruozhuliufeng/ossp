@@ -1,5 +1,6 @@
 package cn.aixuxi.ossp.gateway.error;
 
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -18,6 +19,7 @@ import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
 import org.springframework.web.reactive.result.view.ViewResolver;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -33,34 +35,38 @@ import java.util.List;
 @EnableConfigurationProperties({ServerProperties.class, ResourceProperties.class})
 public class CustomErrorWebFluxAutoConfiguration {
     private final ServerProperties serverProperties;
+
     private final ApplicationContext applicationContext;
+
     private final ResourceProperties resourceProperties;
+
     private final List<ViewResolver> viewResolvers;
+
     private final ServerCodecConfigurer serverCodecConfigurer;
 
     public CustomErrorWebFluxAutoConfiguration(ServerProperties serverProperties,
-                                               ApplicationContext applicationContext,
                                                ResourceProperties resourceProperties,
-                                               List<ViewResolver> viewResolvers,
-                                               ServerCodecConfigurer serverCodecConfigurer) {
+                                               ObjectProvider<List<ViewResolver>> viewResolversProvider,
+                                               ServerCodecConfigurer serverCodecConfigurer,
+                                               ApplicationContext applicationContext) {
         this.serverProperties = serverProperties;
         this.applicationContext = applicationContext;
         this.resourceProperties = resourceProperties;
-        this.viewResolvers = viewResolvers;
+        this.viewResolvers = viewResolversProvider.getIfAvailable(Collections::emptyList);
         this.serverCodecConfigurer = serverCodecConfigurer;
     }
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
-    public ErrorWebExceptionHandler errorWebExceptionHandler(ErrorAttributes errorAttributes){
-        JsonErrorWebExceptionHandler errorWebExceptionHandler = new JsonErrorWebExceptionHandler(
+    public ErrorWebExceptionHandler errorWebExceptionHandler(ErrorAttributes errorAttributes) {
+        JsonErrorWebExceptionHandler exceptionHandler = new JsonErrorWebExceptionHandler(
                 errorAttributes,
                 this.resourceProperties,
                 this.serverProperties.getError(),
                 this.applicationContext);
-        errorWebExceptionHandler.setViewResolvers(this.viewResolvers);
-        errorWebExceptionHandler.setMessageWriters(this.serverCodecConfigurer.getWriters());
-        errorWebExceptionHandler.setMessageReaders(this.serverCodecConfigurer.getReaders());
-        return errorWebExceptionHandler;
+        exceptionHandler.setViewResolvers(this.viewResolvers);
+        exceptionHandler.setMessageWriters(this.serverCodecConfigurer.getWriters());
+        exceptionHandler.setMessageReaders(this.serverCodecConfigurer.getReaders());
+        return exceptionHandler;
     }
 }

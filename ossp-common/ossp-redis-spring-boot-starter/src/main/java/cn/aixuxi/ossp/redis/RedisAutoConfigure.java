@@ -9,6 +9,7 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -53,6 +54,7 @@ public class RedisAutoConfigure {
      * @param redisValueSerializer Redis的Value序列化
      * @return RedisTemplate
      */
+    @Bean
     public RedisTemplate<String,Object> redisTemplate(RedisConnectionFactory factory,
                                                       RedisSerializer<String> redisKeySerializer,
                                                       RedisSerializer<Object> redisValueSerializer){
@@ -65,6 +67,8 @@ public class RedisAutoConfigure {
         return redisTemplate;
     }
 
+    @Bean(name = "cacheManager")
+    @Primary
     public CacheManager cacheManager(RedisConnectionFactory factory,
                                      RedisSerializer<String> redisKeySerializer,
                                      RedisSerializer<Object> redisValueSerializer){

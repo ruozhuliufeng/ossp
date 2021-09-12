@@ -2,6 +2,8 @@ package cn.aixuxi.ossp.auth.client.store;
 
 import cn.aixuxi.ossp.auth.client.properties.SecurityPropertis;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -17,9 +19,11 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
  *        havingValue: 可与name组合使用，比较获取到的属性值与havingValue给定的值是否相同，相同才加载配置
  *        matchIfMissing: 缺少该配置属性时是否可以加载。如果为true，没有该配置属性时也会正常加载，反之则不会生效
  */
+@Configuration
 @ConditionalOnProperty(prefix = "ossp.oauth2.token.store",name = "type",havingValue = "redis",matchIfMissing = true)
 public class AuthRedisTokenStore {
 
+    @Bean
     public TokenStore tokenStore(RedisConnectionFactory connectionFactory, SecurityPropertis securityPropertis,
                                  RedisSerializer<Object> redisSerializer){
         return new CustomRedisTokenStore(connectionFactory,securityPropertis,redisSerializer);

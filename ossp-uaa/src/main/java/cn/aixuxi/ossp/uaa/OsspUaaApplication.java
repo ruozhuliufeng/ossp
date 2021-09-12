@@ -7,9 +7,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 
-@EnableFeignClients
+@EnableFeignClients(basePackages = "cn.aixuxi.ossp")
 @EnableFeignInterceptor
-@EnableRedisHttpSession
+//@EnableRedisHttpSession
 @EnableDiscoveryClient
 @SpringBootApplication
 public class OsspUaaApplication {

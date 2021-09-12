@@ -4,6 +4,7 @@ import cn.aixuxi.ossp.common.feign.UserService;
 import cn.aixuxi.ossp.common.model.LoginAppUser;
 import cn.aixuxi.ossp.uaa.service.OsspUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.userdetails.UserDetails;

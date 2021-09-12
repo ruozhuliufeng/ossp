@@ -4,6 +4,7 @@ import cn.aixuxi.ossp.auth.client.converter.CustomUserAuthenticationConverter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.bootstrap.encrypt.KeyProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -18,6 +19,7 @@ import java.util.Locale;
 /**
  * 认证服务器使用JWT RSA非对称加密令牌
  */
+@Configuration
 @ConditionalOnProperty(prefix = "ossp.oauth2.token.store",name = "type",havingValue = "authJwt")
 public class AuthJwtTokenStore {
 
