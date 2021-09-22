@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.aixuxi.ossp.auth.client.AuthClientAutoConfiguration
+cn.aixuxi.ossp.common.lb.RestTemplateAutoConfigure

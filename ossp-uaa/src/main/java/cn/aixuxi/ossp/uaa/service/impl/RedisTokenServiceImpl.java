@@ -68,6 +68,9 @@ public class RedisTokenServiceImpl implements ITokenService {
                     tokenVO.setClientId(request.getClientId());
                     tokenVO.setGrantType(request.getGrantType());
                 }
+                Map<String,Object> additionalInformation = accessToken.getAdditionalInformation();
+                String accountType = (String) additionalInformation.get(SecurityConstants.ACCOUNT_TYPE_PARAM_NAME);
+                tokenVO.setAccountType(accountType);
                 result.add(tokenVO);
             }
         }

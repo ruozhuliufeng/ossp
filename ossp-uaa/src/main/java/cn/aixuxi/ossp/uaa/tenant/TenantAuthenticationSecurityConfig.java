@@ -1,6 +1,7 @@
 package cn.aixuxi.ossp.uaa.tenant;
 
 import cn.aixuxi.ossp.uaa.service.OsspUserDetailsService;
+import cn.aixuxi.ossp.uaa.service.impl.UserDetailServiceFactory;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,19 +15,19 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class TenantAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-    private OsspUserDetailsService userDetailsService;
-    private PasswordEncoder passwordEncoder;
+    private final UserDetailServiceFactory userDetailServiceFactory;
+    private final PasswordEncoder passwordEncoder;
 
-    public TenantAuthenticationSecurityConfig(OsspUserDetailsService userDetailsService,
+    public TenantAuthenticationSecurityConfig(UserDetailServiceFactory userDetailServiceFactory,
                                               PasswordEncoder passwordEncoder){
-        this.userDetailsService = userDetailsService;
+        this.userDetailServiceFactory = userDetailServiceFactory;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         TenantAuthenticationProvider provider = new TenantAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
+        provider.setUserDetailsServiceFactory(userDetailServiceFactory);
         provider.setPasswordEncoder(passwordEncoder);
         http.authenticationProvider(provider);
     }

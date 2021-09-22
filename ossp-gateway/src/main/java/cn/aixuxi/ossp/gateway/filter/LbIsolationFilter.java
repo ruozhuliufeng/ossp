@@ -1,6 +1,6 @@
 package cn.aixuxi.ossp.gateway.filter;
 
-import cn.aixuxi.ossp.common.constant.CommonConstant;
+/*import cn.aixuxi.ossp.common.constant.CommonConstant;
 import cn.aixuxi.ossp.common.constant.ConfigConstants;
 import cn.hutool.core.util.StrUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -10,7 +10,7 @@ import org.springframework.cloud.gateway.config.LoadBalancerProperties;
 import org.springframework.cloud.gateway.filter.LoadBalancerClientFilter;
 import org.springframework.cloud.netflix.ribbon.RibbonLoadBalancerClient;
 import org.springframework.stereotype.Component;
-import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.ServerWebExchange;*/
 
 import java.net.URI;
 
@@ -22,7 +22,7 @@ import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.G
  * @version 1.0
  * @date 2021-09-10 15:20
  **/
-@Component
+/*@Component
 @ConditionalOnProperty(name = ConfigConstants.CONFIG_RIBBON_ISOLATION_ENABLED,havingValue = "true")
 public class LbIsolationFilter extends LoadBalancerClientFilter {
     public LbIsolationFilter(LoadBalancerClient loadBalancer, LoadBalancerProperties properties) {
@@ -41,4 +41,4 @@ public class LbIsolationFilter extends LoadBalancerClientFilter {
         }
         return super.choose(exchange);
     }
-}
+}*/

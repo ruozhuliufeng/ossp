@@ -26,7 +26,7 @@ public class CrosConfig {
         // cookie跨域
         config.setAllowCredentials(Boolean.TRUE);
         config.addAllowedMethod(ALL);
-        config.addAllowedOrigin(ALL);
+        config.addAllowedOriginPattern(ALL);
         config.addAllowedHeader(ALL);
         // 配置前端js允许访问的自定义响应头
         config.addExposedHeader("setToken");

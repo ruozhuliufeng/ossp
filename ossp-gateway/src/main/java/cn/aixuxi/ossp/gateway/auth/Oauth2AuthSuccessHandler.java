@@ -1,5 +1,6 @@
 package cn.aixuxi.ossp.gateway.auth;
 
+import cn.aixuxi.ossp.auth.client.util.AuthUtils;
 import cn.aixuxi.ossp.common.constant.SecurityConstants;
 import cn.aixuxi.ossp.common.model.SysUser;
 import cn.hutool.core.collection.CollectionUtil;
@@ -34,6 +35,8 @@ public class Oauth2AuthSuccessHandler implements ServerAuthenticationSuccessHand
         String clientId = oAuth2Authentication.getOAuth2Request().getClientId();
         headerValues.add(SecurityConstants.TENANT_HEADER,clientId);
         headerValues.add(SecurityConstants.ROLE_HEADER, CollectionUtil.join(authentication.getAuthorities(),","));
+        String accountType = AuthUtils.getAccountType(oAuth2Authentication.getUserAuthentication());
+        headerValues.add(SecurityConstants.ACCOUNT_TYPE_HEADER,accountType);
         ServerWebExchange exchange = webFilterExchange.getExchange();
         ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
                 .headers( h -> {

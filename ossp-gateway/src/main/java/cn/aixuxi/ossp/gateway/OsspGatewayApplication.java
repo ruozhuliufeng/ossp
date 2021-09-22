@@ -1,6 +1,6 @@
 package cn.aixuxi.ossp.gateway;
 
-import cn.aixuxi.ossp.common.ribbon.annotation.EnableBaseFeignInterceptor;
+import cn.aixuxi.ossp.common.lb.annotation.EnableBaseFeignInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;

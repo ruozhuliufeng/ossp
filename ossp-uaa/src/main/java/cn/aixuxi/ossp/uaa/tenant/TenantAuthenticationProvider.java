@@ -1,7 +1,7 @@
 package cn.aixuxi.ossp.uaa.tenant;
 
 import cn.aixuxi.ossp.auth.client.token.TenantUsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import cn.aixuxi.ossp.uaa.password.PasswordAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @version 1.0
  * @date 2021-09-06 17:03
  **/
-public class TenantAuthenticationProvider extends DaoAuthenticationProvider {
+public class TenantAuthenticationProvider extends PasswordAuthenticationProvider {
     @Override
     protected Authentication createSuccessAuthentication(Object principal,
                                                          Authentication authentication,

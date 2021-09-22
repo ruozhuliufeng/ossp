@@ -1,5 +1,6 @@
 package cn.aixuxi.ossp.uaa.service.impl;
 
+import cn.aixuxi.ossp.common.constant.SecurityConstants;
 import cn.aixuxi.ossp.common.feign.UserService;
 import cn.aixuxi.ossp.common.model.LoginAppUser;
 import cn.aixuxi.ossp.uaa.service.OsspUserDetailsService;
@@ -23,10 +24,22 @@ import javax.annotation.Resource;
  **/
 @Slf4j
 @Service
-public class UserDetailsServiceImpl implements OsspUserDetailsService, SocialUserDetailsService {
+public class UserDetailsServiceImpl implements OsspUserDetailsService {
 
+    private static final String ACCOUT_TYPE = SecurityConstants.DEF_ACCOUNT_TYPE;
     @Resource
     private UserService userService;
+
+    /**
+     * 判断实现类是否属于该类型
+     *
+     * @param accountType 账号类型
+     * @return 是否支持
+     */
+    @Override
+    public boolean supports(String accountType) {
+        return ACCOUT_TYPE.equals(accountType);
+    }
 
     /**
      * 根据电话号码查询用户

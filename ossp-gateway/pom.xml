@@ -20,7 +20,7 @@
         </dependency>
         <dependency>
             <groupId>cn.aixuxi.ossp.common</groupId>
-            <artifactId>ossp-ribbon-spring-boot-starter</artifactId>
+            <artifactId>ossp-loadbalancer-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.aixuxi.ossp.common</groupId>
@@ -33,12 +33,12 @@
         <dependency>
             <groupId>cn.aixuxi.ossp.common</groupId>
             <artifactId>ossp-redis-spring-boot-starter</artifactId>
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>org.springframework.boot</groupId>-->
-<!--                    <artifactId>spring-boot-starter-web</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- 网关 -->
         <dependency>
@@ -90,10 +90,6 @@
         <dependency>
             <groupId>org.springframework.security.oauth</groupId>
             <artifactId>spring-security-oauth2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
         </dependency>
     </dependencies>
 

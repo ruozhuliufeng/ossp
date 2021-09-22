@@ -61,6 +61,8 @@ public class TokenArgumentResolver implements HandlerMethodArgumentResolver {
         String userId = request.getHeader(SecurityConstants.USER_ID_HEADER);
         String username = request.getHeader(SecurityConstants.USER_HEADER);
         String roles = request.getHeader(SecurityConstants.ROLE_HEADER);
+        // 账号类型
+        String accountType = request.getHeader(SecurityConstants.ACCOUNT_TYPE_HEADER);
         if (StrUtil.isBlank(username)){
             log.warn("参数有误，用户名为空！");
             return null;

@@ -37,4 +37,8 @@ public class TokenVO implements Serializable {
      * 授权类型
      */
     private String grantType;
+    /**
+     * 账号类型
+     */
+    private String accountType;
 }

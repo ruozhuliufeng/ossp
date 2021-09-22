@@ -1,6 +1,8 @@
 package cn.aixuxi.ossp.auth.client.util;
 
+import cn.aixuxi.ossp.auth.client.token.CustomWebAuthenticationDetails;
 import cn.aixuxi.ossp.common.constant.CommonConstant;
+import cn.aixuxi.ossp.common.constant.SecurityConstants;
 import cn.aixuxi.ossp.common.model.SysUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Enumeration;
+import java.util.Map;
 
 /**
  * 认证授权相关工具类
@@ -100,5 +103,26 @@ public class AuthUtils {
             username = (String) principal;
         }
         return username;
+    }
+
+
+    /**
+     * 获取登陆的帐户类型
+     */
+    public static String getAccountType(Authentication authentication) {
+        Object details = authentication.getDetails();
+        String accountType = null;
+        if (details != null) {
+            if (details instanceof CustomWebAuthenticationDetails) {
+                CustomWebAuthenticationDetails detailsObj = (CustomWebAuthenticationDetails) details;
+                accountType = detailsObj.getAccountType();
+            } else {
+                Map<String, String> detailsMap = (Map<String, String>) details;
+                if (detailsMap != null) {
+                    accountType = detailsMap.get(SecurityConstants.ACCOUNT_TYPE_PARAM_NAME);
+                }
+            }
+        }
+        return accountType;
     }
 }

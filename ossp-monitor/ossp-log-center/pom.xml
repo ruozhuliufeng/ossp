@@ -21,10 +21,9 @@
             <groupId>cn.aixuxi.ossp.common</groupId>
             <artifactId>ossp-common-spring-boot-starter</artifactId>
         </dependency>
-        <!-- 负载均衡组件待更换 -->
         <dependency>
             <groupId>cn.aixuxi.ossp.common</groupId>
-            <artifactId>ossp-ribbon-spring-boot-starter</artifactId>
+            <artifactId>ossp-loadbalancer-spring-boot-starter</artifactId>
         </dependency>
         <dependency>
             <groupId>cn.aixuxi.ossp.common</groupId>

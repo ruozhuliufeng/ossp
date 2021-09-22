@@ -3,7 +3,7 @@ package cn.aixuxi.ossp.common.feign.fallback;
 import cn.aixuxi.ossp.common.feign.UserService;
 import cn.aixuxi.ossp.common.model.LoginAppUser;
 import cn.aixuxi.ossp.common.model.SysUser;
-import feign.hystrix.FallbackFactory;
+import org.springframework.cloud.openfeign.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
 
 /**

@@ -3,8 +3,8 @@ package cn.aixuxi.ossp.search.client.client.feign.fallback;
 import cn.aixuxi.ossp.common.model.PageResult;
 import cn.aixuxi.ossp.search.client.client.feign.SearchService;
 import com.fasterxml.jackson.databind.JsonNode;
-import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cloud.openfeign.FallbackFactory;
 
 /**
  * SearchService降级工场

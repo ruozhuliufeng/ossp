@@ -30,7 +30,7 @@ public abstract class DefaultPermissionServiceImpl {
     @Autowired
     private SecurityPropertis propertis;
 
-    private AntPathMatcher antPathMatcher = new AntPathMatcher();
+    private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
     /**
      * 查询当前用户拥有的资源权限

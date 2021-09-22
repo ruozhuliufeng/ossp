@@ -1,6 +1,6 @@
 package cn.aixuxi.ossp.business.user;
 
-import cn.aixuxi.ossp.common.ribbon.annotation.EnableFeignInterceptor;
+import cn.aixuxi.ossp.common.lb.annotation.EnableFeignInterceptor;
 import cn.aixuxi.ossp.search.client.annotation.EnableSearchClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

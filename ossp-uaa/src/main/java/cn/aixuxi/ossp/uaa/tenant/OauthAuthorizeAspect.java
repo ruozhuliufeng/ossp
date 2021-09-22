@@ -4,6 +4,7 @@ import cn.aixuxi.ossp.auth.client.token.TenantUsernamePasswordAuthenticationToke
 import cn.aixuxi.ossp.common.context.TenantContextHolder;
 import cn.aixuxi.ossp.common.feign.UserService;
 import cn.aixuxi.ossp.common.model.LoginAppUser;
+import cn.aixuxi.ossp.uaa.service.impl.UserDetailServiceFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -25,9 +26,12 @@ import java.util.Map;
 @Component
 @Aspect
 public class OauthAuthorizeAspect {
-    @Autowired
-    private UserService userService;
 
+    private final UserDetailServiceFactory userDetailServiceFactory;
+
+    public OauthAuthorizeAspect(UserDetailServiceFactory userDetailServiceFactory) {
+        this.userDetailServiceFactory = userDetailServiceFactory;
+    }
     @Around("execution(* org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint.authorize(..))")
     public Object doArroundMethod(ProceedingJoinPoint joinPoint) throws Throwable{
         Object[] args = joinPoint.getArgs();
@@ -39,11 +43,14 @@ public class OauthAuthorizeAspect {
             String requestClientId = parameters.get(OAuth2Utils.CLIENT_ID);
             // 判断是否不同租户单点登录
             if (!requestClientId.equals(clientId)){
+                Object details = tenantToken.getDetails();
                 try {
                     TenantContextHolder.setTenant(requestClientId);
                     // 重新查询对应该租户的角色等信息
-                    LoginAppUser user = userService.findByUsername(tenantToken.getName());
+                    LoginAppUser user = (LoginAppUser) userDetailServiceFactory.getService(tenantToken)
+                            .loadUserByUsername(tenantToken.getName());
                     tenantToken = new TenantUsernamePasswordAuthenticationToken(user,tenantToken.getCredentials(),user.getAuthorities(),requestClientId);
+                    tenantToken.setDetails(details);
                     args[3] = tenantToken;
                 }finally {
                     TenantContextHolder.clear();

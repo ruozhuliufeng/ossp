@@ -40,5 +40,7 @@
         <module>ossp-zookeeper-spring-boot-starter</module>
         <!-- 对象存储通用组件 -->
         <module>ossp-oss-spring-boot-starter</module>
+        <!-- 负载均衡通用组件 -->
+        <module>ossp-loadbalancer-spring-boot-starter</module>
     </modules>
 </project>

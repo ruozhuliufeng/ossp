@@ -2,7 +2,7 @@ package cn.aixuxi.ossp.gateway.auth;
 
 import cn.aixuxi.ossp.auth.client.service.impl.DefaultPermissionServiceImpl;
 import cn.aixuxi.ossp.common.model.SysMenu;
-import cn.aixuxi.ossp.gateway.feign.MenuService;
+import cn.aixuxi.ossp.gateway.feign.AsynMenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -14,7 +14,9 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.Future;
 
 /**
  * URL 权限认证
@@ -28,7 +30,7 @@ import java.util.List;
 public class PermissionAuthManager extends DefaultPermissionServiceImpl implements ReactiveAuthorizationManager<AuthorizationContext> {
 
     @Resource
-    private MenuService menuService;
+    private AsynMenuService asynMenuService;
 
     /**
      * 查询当前用户拥有的资源权限
@@ -38,7 +40,13 @@ public class PermissionAuthManager extends DefaultPermissionServiceImpl implemen
      */
     @Override
     public List<SysMenu> findMenuByRoleCodes(String roleCodes) {
-        return menuService.findByRoleCodes(roleCodes);
+        Future<List<SysMenu>> futureResult = asynMenuService.findByRoleCodes(roleCodes);
+        try{
+            return futureResult.get();
+        }catch (Exception e){
+            log.error("异步获取菜单信息失败！失败原因：{}",e.getMessage());
+        }
+        return Collections.emptyList();
     }
 
 

@@ -167,4 +167,20 @@ public interface SecurityConstants {
      * 令牌颁发者
      */
     String ISS = "http://www.aixuxi.cn";
+
+    /**
+     * 账号类型信息头
+     */
+    String ACCOUNT_TYPE_HEADER = "x-account-type-header";
+
+
+    /**
+     * 默认账号类型
+     */
+    String DEF_ACCOUNT_TYPE = "admin";
+
+    /**
+     * 账号类型参数名
+     */
+    String ACCOUNT_TYPE_PARAM_NAME = "account_type";
 }
