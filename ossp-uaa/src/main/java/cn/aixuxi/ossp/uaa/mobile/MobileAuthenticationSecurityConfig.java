@@ -1,12 +1,15 @@
 package cn.aixuxi.ossp.uaa.mobile;
 
 import cn.aixuxi.ossp.uaa.service.OsspUserDetailsService;
+import cn.aixuxi.ossp.uaa.service.impl.UserDetailServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * mobile的相关处理配置
@@ -16,15 +19,15 @@ import org.springframework.stereotype.Component;
  **/
 @Component
 public class MobileAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
-    @Autowired
-    private OsspUserDetailsService userDetailsService;
+    @Resource
+    private UserDetailServiceFactory userDetailServiceFactory;
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         MobileAuthenticationProvider provider = new MobileAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
+        provider.setUserDetailServiceFactory(userDetailServiceFactory);
         provider.setPasswordEncoder(passwordEncoder);
         http.authenticationProvider(provider);
     }

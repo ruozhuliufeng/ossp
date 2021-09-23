@@ -5,6 +5,8 @@ import cn.aixuxi.ossp.uaa.granter.OpenIdGranter;
 import cn.aixuxi.ossp.uaa.granter.PwdImgCodeGranter;
 import cn.aixuxi.ossp.uaa.service.IValidateCodeService;
 import cn.aixuxi.ossp.uaa.service.impl.CustomTokenService;
+import cn.aixuxi.ossp.uaa.service.impl.UserDetailServiceFactory;
+import cn.aixuxi.ossp.uaa.service.impl.UserDetailsByNameServiceFactoryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -43,7 +45,7 @@ public class TokenGranterConfig {
     @Autowired
     private ClientDetailsService clientDetailsService;
     @Autowired
-    private UserDetailsService userDetailsService;
+    private UserDetailServiceFactory userDetailServiceFactory;
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
@@ -158,7 +160,7 @@ public class TokenGranterConfig {
         tokenServices.setReuseRefreshToken(reuseRefreshToken);
         tokenServices.setClientDetailsService(clientDetailsService);
         tokenServices.setTokenEnhancer(tokenEnhancer());
-        addUserDetailsService(tokenServices, this.userDetailsService);
+        addUserDetailsService(tokenServices);
         return tokenServices;
     }
 
@@ -172,10 +174,10 @@ public class TokenGranterConfig {
         return null;
     }
 
-    private void addUserDetailsService(DefaultTokenServices tokenServices, UserDetailsService userDetailsService) {
-        if (userDetailsService != null) {
+    private void addUserDetailsService(DefaultTokenServices tokenServices) {
+        if (userDetailServiceFactory != null) {
             PreAuthenticatedAuthenticationProvider provider = new PreAuthenticatedAuthenticationProvider();
-            provider.setPreAuthenticatedUserDetailsService(new UserDetailsByNameServiceWrapper<>(userDetailsService));
+            provider.setPreAuthenticatedUserDetailsService(new UserDetailsByNameServiceFactoryWrapper<>(this.userDetailServiceFactory));
             tokenServices.setAuthenticationManager(new ProviderManager(Collections.singletonList(provider)));
         }
     }

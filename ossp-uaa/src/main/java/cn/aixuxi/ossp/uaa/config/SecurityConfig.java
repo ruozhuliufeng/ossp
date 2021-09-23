@@ -1,5 +1,6 @@
 package cn.aixuxi.ossp.uaa.config;
 
+import cn.aixuxi.ossp.auth.client.token.CustomWebAuthenticationDetails;
 import cn.aixuxi.ossp.common.config.DefaultPasswordConfig;
 import cn.aixuxi.ossp.common.constant.SecurityConstants;
 import cn.aixuxi.ossp.common.properties.TenantProperties;
@@ -7,12 +8,15 @@ import cn.aixuxi.ossp.uaa.filter.LoginProcessSetTenantFilter;
 import cn.aixuxi.ossp.uaa.handler.OauthLogoutSuccessHandler;
 import cn.aixuxi.ossp.uaa.mobile.MobileAuthenticationSecurityConfig;
 import cn.aixuxi.ossp.uaa.openid.OpenIdAuthenticationSecurityConfig;
+import cn.aixuxi.ossp.uaa.password.PasswordAuthenticationProvider;
+import cn.aixuxi.ossp.uaa.service.impl.UserDetailServiceFactory;
 import cn.aixuxi.ossp.uaa.tenant.TenantAuthenticationSecurityConfig;
 import cn.aixuxi.ossp.uaa.tenant.TenantUsernamePasswordAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,6 +31,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Spring Security配置，在WebSecurityConfigurerAdapter不拦截oauth要开放的资源
@@ -43,7 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private AuthenticationEntryPoint authenticationEntryPoint;
 
     @Resource
-    private UserDetailsService userDetailsService;
+    private UserDetailServiceFactory userDetailServiceFactory;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @Resource
@@ -58,6 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private TenantAuthenticationSecurityConfig tenantAuthenticationSecurityConfig;
     @Autowired
     private TenantProperties tenantProperties;
+    @Autowired
+    private AuthenticationDetailsSource<HttpServletRequest, CustomWebAuthenticationDetails> authenticationDetailsSource;
 
     /**
      * 这一步的配置是必不可少的，否则SpringBoot会自动配置一个AuthenticationManger，
@@ -78,6 +85,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setFilterProcessesUrl(SecurityConstants.OAUTH_LOGIN_PRO_URL);
         filter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
         filter.setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler(SecurityConstants.LOGIN_FAILURE_PAGE));
+        filter.setAuthenticationDetailsSource(authenticationDetailsSource);
         return filter;
     }
 
@@ -113,7 +121,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             http.formLogin()
                     .loginPage(SecurityConstants.LOGIN_PAGE)
                     .loginProcessingUrl(SecurityConstants.OAUTH_LOGIN_PRO_URL)
-                    .successHandler(authenticationSuccessHandler);
+                    .successHandler(authenticationSuccessHandler)
+                    .authenticationDetailsSource(authenticationDetailsSource);
+
         }
         // 基于密码等模式可以无session，不支持授权码模式
         if (authenticationEntryPoint != null){
@@ -130,11 +140,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 全局用户信息
      * @param auth 用户授权信息
-     * @throws Exception
+     * @throws Exception 异常
      */
-    @Autowired
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        PasswordAuthenticationProvider provider = new PasswordAuthenticationProvider();
+        provider.setPasswordEncoder(passwordEncoder);
+        provider.setUserDetailServiceFactory(userDetailServiceFactory);
+        auth.authenticationProvider(provider);
+    }
+/*    @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
-    }
+    }*/
 
 }

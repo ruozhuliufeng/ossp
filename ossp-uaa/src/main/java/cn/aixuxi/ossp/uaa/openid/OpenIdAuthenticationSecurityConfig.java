@@ -1,5 +1,6 @@
 package cn.aixuxi.ossp.uaa.openid;
 
+import cn.aixuxi.ossp.uaa.service.impl.UserDetailServiceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,12 +17,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class OpenIdAuthenticationSecurityConfig extends SecurityConfigurerAdapter<DefaultSecurityFilterChain, HttpSecurity> {
     @Autowired
-    private SocialUserDetailsService userDetailsService;
+    private UserDetailServiceFactory userDetailServiceFactory;
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         OpenIdAuthenticationProvider provider = new OpenIdAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
+        provider.setUserDetailServiceFactory(userDetailServiceFactory);
         http.authenticationProvider(provider);
     }
 }
