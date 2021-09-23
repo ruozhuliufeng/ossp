@@ -39,9 +39,7 @@ public class Oauth2AuthSuccessHandler implements ServerAuthenticationSuccessHand
         headerValues.add(SecurityConstants.ACCOUNT_TYPE_HEADER,accountType);
         ServerWebExchange exchange = webFilterExchange.getExchange();
         ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
-                .headers( h -> {
-                    h.addAll(headerValues);
-                })
+                .headers( h -> h.addAll(headerValues))
                 .build();
         ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
         return webFilterExchange.getChain().filter(build);

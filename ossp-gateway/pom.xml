@@ -10,26 +10,31 @@
     <groupId>cn.aixuxi.ossp</groupId>
     <artifactId>ossp-gateway</artifactId>
     <name>ossp-gateway</name>
-    <description>OSSP网关工程</description>
+    <description>OSSP 网关</description>
 
     <dependencies>
         <!-- 通用依赖 -->
+        <!-- OSSP 配置 -->
         <dependency>
             <groupId>cn.aixuxi.ossp</groupId>
             <artifactId>ossp-config</artifactId>
         </dependency>
+        <!-- 负载均衡组件 -->
         <dependency>
             <groupId>cn.aixuxi.ossp.common</groupId>
             <artifactId>ossp-loadbalancer-spring-boot-starter</artifactId>
         </dependency>
+        <!-- 限流熔断组件 -->
         <dependency>
             <groupId>cn.aixuxi.ossp.common</groupId>
             <artifactId>ossp-sentinel-spring-boot-starter</artifactId>
         </dependency>
+        <!-- 认证组件 -->
         <dependency>
             <groupId>cn.aixuxi.ossp.common</groupId>
             <artifactId>ossp-auth-client-spring-boot-starter</artifactId>
         </dependency>
+        <!-- Redis组件，需要排除web组件 -->
         <dependency>
             <groupId>cn.aixuxi.ossp.common</groupId>
             <artifactId>ossp-redis-spring-boot-starter</artifactId>
@@ -40,27 +45,32 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- 网关 -->
+        <!-- Spring Cloud 网关 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-gateway</artifactId>
         </dependency>
+        <!-- Nacos服务注册发现 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+        <!-- 非阻塞异步的框架 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
+        <!-- Feign远程调用 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
+        <!-- 应用监控 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+        <!-- 配置信息 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -71,18 +81,22 @@
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
         </dependency>
+        <!-- OAuth2 资源服务 -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-resource-server</artifactId>
         </dependency>
+        <!-- MyBatis Plus 扩展 -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-extension</artifactId>
         </dependency>
+        <!-- 集成Prometheus监控Java应用性能 -->
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
         </dependency>
+        <!-- 解析User-Agent字符串的java类库 -->
         <dependency>
             <groupId>eu.bitwalker</groupId>
             <artifactId>UserAgentUtils</artifactId>
