@@ -1,6 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.aixuxi.ossp.common.ribbon.RibbonAutoConfigure,\
-cn.aixuxi.ossp.common.ribbon.FeignAutoConfigure,\
-cn.aixuxi.ossp.common.ribbon.RestTemplateAutoConfigure,\
-cn.aixuxi.ossp.common.ribbon.LbIsolationAutoConfigure,\
-cn.aixuxi.ossp.common.ribbon.filter.LbIsolationFilter

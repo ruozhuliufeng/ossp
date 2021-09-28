@@ -2,7 +2,6 @@ package cn.aixuxi.ossp.auth.client.token;
 
 import lombok.Getter;
 
-import javax.naming.directory.SearchResult;
 import java.io.Serializable;
 
 /**
@@ -19,10 +18,10 @@ public class CustomWebAuthenticationDetails implements Serializable {
     private final String remoteAddress;
     private final String sessionId;
 
-    public CustomWebAuthenticationDetails(String accountType, String remoteAddress, String sessionId) {
-        this.accountType = accountType;
+    public CustomWebAuthenticationDetails(String remoteAddress, String sessionId, String accountType) {
         this.remoteAddress = remoteAddress;
         this.sessionId = sessionId;
+        this.accountType = accountType;
     }
 
     /**

@@ -8,7 +8,7 @@ spring:
 mybatis-plus:
   mapper-locations: classpath:/mapper/*Mapper.xml
   #实体扫描，多个package用逗号或者分号分隔
-  typeAliasesPackage: com.central.file.model
+  typeAliasesPackage: cn.aixuxi.ossp.business.file.model
   global-config:
     db-config:
       id-type: INPUT
@@ -17,18 +17,18 @@ ossp:
   file-server:
     type: s3
     #fdfs:
-    #  web-url: ${zlt.fdfs.web-url}
+    #  web-url: ${ossp.fdfs.web-url}
     s3:
-      access-key: ${zlt.s3.access-key}
-      accessKeySecret: ${zlt.s3.accessKeySecret}
-      endpoint: ${zlt.s3.endpoint}
-      bucketName: ${zlt.s3.bucketName}
+      access-key: ${ossp.s3.access-key}
+      accessKeySecret: ${ossp.s3.accessKeySecret}
+      endpoint: ${ossp.s3.endpoint}
+      bucketName: ${ossp.s3.bucketName}
   swagger:
     enabled: true
     title: 文件中心
     description: 文件中心接口文档
     version: 1.0
-    base-package: com.central.file.controller
+    base-package: cn.aixuxi.ossp.business.file.controller
   #多租户配置
   tenant:
     enable: true
@@ -37,4 +37,4 @@ ossp:
 #fdfs:
 #  soTimeout: 1500
 #  connectTimeout: 600
-#  trackerList: ${zlt.fdfs.trackerList}
+#  trackerList: ${ossp.fdfs.trackerList}

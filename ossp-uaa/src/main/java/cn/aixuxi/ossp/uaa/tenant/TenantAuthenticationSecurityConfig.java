@@ -1,6 +1,5 @@
 package cn.aixuxi.ossp.uaa.tenant;
 
-import cn.aixuxi.ossp.uaa.service.OsspUserDetailsService;
 import cn.aixuxi.ossp.uaa.service.impl.UserDetailServiceFactory;
 import org.springframework.security.config.annotation.SecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,7 +26,7 @@ public class TenantAuthenticationSecurityConfig extends SecurityConfigurerAdapte
     @Override
     public void configure(HttpSecurity http) throws Exception {
         TenantAuthenticationProvider provider = new TenantAuthenticationProvider();
-        provider.setUserDetailsServiceFactory(userDetailServiceFactory);
+        provider.setUserDetailServiceFactory(userDetailServiceFactory);
         provider.setPasswordEncoder(passwordEncoder);
         http.authenticationProvider(provider);
     }

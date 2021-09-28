@@ -3,7 +3,7 @@ package cn.aixuxi.ossp.common.constant;
 /**
  * Security 权限常量
  *
- * @author zlt
+ * @author ossp
  */
 public interface SecurityConstants {
     /**
@@ -111,9 +111,9 @@ public interface SecurityConstants {
      */
     String DEFAULT_IMAGE_FONT_SIZE = "30";
     /**
-     * zlt公共前缀
+     * ossp公共前缀
      */
-    String ZLT_PREFIX = "zlt:";
+    String ossp_PREFIX = "ossp:";
     /**
      * 缓存client的redis key，这里是hash结构存储
      */

@@ -166,11 +166,6 @@
             </dependency>
             <dependency>
                 <groupId>cn.aixuxi.ossp.common</groupId>
-                <artifactId>ossp-ribbon-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>cn.aixuxi.ossp.common</groupId>
                 <artifactId>ossp-common-spring-boot-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -501,6 +496,8 @@
         <module>ossp-business</module>
         <!-- 事务 -->
         <module>ossp-transaction</module>
+        <!-- 样例工程 -->
+        <module>ossp-demo</module>
     </modules>
 
     <licenses>

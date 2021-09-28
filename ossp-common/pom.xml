@@ -20,8 +20,6 @@
         <module>ossp-common-core</module>
         <!-- 通用工具模块 -->
         <module>ossp-common-spring-boot-starter</module>
-        <!-- 通用Ribbon工具模块 -->
-        <module>ossp-ribbon-spring-boot-starter</module>
         <!-- 日志工具模块 -->
         <module>ossp-log-spring-boot-starter</module>
         <!-- Redis工具模块 -->
