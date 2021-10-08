@@ -12,5 +12,5 @@ spring:
 encrypt:
   key-store:
     location: classpath:ossp.jks
-    secret: zlt!@#$
+    secret: Ll123789
     alias: ossp

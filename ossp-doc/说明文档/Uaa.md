@@ -97,3 +97,34 @@ spring:
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
 ```
+
+### JWT的RSA非对称密钥生成
+
+#### 一、生成密钥文件
+使用jdk自带的keytool工具，执行后会在当前目录生成 ossp.jks 密钥文件
+- 1.执行指令
+- 2.输入密钥库口令2次
+- 3.输入信息或者直接回车
+- 4.“是否正确”输入y
+- 5.输入密钥口
+
+```text 
+keytool -genkey -alias zlt -keyalg RSA -storetype PKCS12 -keysize 1024 -keystore zlt.jks 
+```
+- 参数解析
+  - genkey：创建证书
+  - alias：证书的别名。在一个证书库文件中，别名是唯一用来区分多个证书的标识符
+  - keyalg：密钥的算法，非对称加密的话就是RSA
+  - keystore：证书库文件保存的位置和文件名。如果路径写错的话，会出现报错信息。如果在路径下，证书库文件不存在，那么就会创建一个
+  - keysize：密钥长度，一般都是1024
+  - validity：证书的有效期，单位是天。比如36500的话，就是100年
+#### 二、提取公钥
+```text
+keytool -list -rfc -keystore zlt.jks -storepass zlt@123 | openssl x509 -inform pem -pubkey
+```
+红框的内容就是公钥内容，直接创建一个pubkey.txt文件复制到里面就行了
+![img.png](img.png)
+
+参数解析:
+- keystore：密钥文件
+- storepass：密钥密码
