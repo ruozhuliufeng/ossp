@@ -20,8 +20,6 @@
         <module>ossp-file-center</module>
         <!-- 数据搜索中心 -->
         <module>ossp-search-center</module>
-        <!-- 代码生成 -->
-        <module>ossp-code-generator</module>
     </modules>
 
 </project>

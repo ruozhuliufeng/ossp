@@ -120,10 +120,10 @@ keytool -genkey -alias zlt -keyalg RSA -storetype PKCS12 -keysize 1024 -keystore
   - validity：证书的有效期，单位是天。比如36500的话，就是100年
 #### 二、提取公钥
 ```text
-keytool -list -rfc -keystore zlt.jks -storepass zlt@123 | openssl x509 -inform pem -pubkey
+keytool -list -rfc -keystore ossp.jks -storepass Ll123789 | openssl x509 -inform pem -pubkey
 ```
 红框的内容就是公钥内容，直接创建一个pubkey.txt文件复制到里面就行了
-![img.png](img.png)
+![img.png](http://img.aixuxi.cn/20211009175200.png)
 
 参数解析:
 - keystore：密钥文件

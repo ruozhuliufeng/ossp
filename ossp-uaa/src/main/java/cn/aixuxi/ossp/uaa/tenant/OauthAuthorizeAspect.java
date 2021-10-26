@@ -2,14 +2,12 @@ package cn.aixuxi.ossp.uaa.tenant;
 
 import cn.aixuxi.ossp.auth.client.token.TenantUsernamePasswordAuthenticationToken;
 import cn.aixuxi.ossp.common.context.TenantContextHolder;
-import cn.aixuxi.ossp.common.feign.UserService;
 import cn.aixuxi.ossp.common.model.LoginAppUser;
 import cn.aixuxi.ossp.uaa.service.impl.UserDetailServiceFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.util.OAuth2Utils;
 import org.springframework.stereotype.Component;
 
