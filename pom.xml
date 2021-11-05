@@ -241,11 +241,11 @@
                 <version>${redisson-starter.version}</version>
             </dependency>
             <!-- swagger -->
-            <dependency>
-                <groupId>com.github.zlt2000</groupId>
-                <artifactId>swagger-butler-core</artifactId>
-                <version>${swagger.butler.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.github.zlt2000</groupId>-->
+<!--                <artifactId>swagger-butler-core</artifactId>-->
+<!--                <version>${swagger.butler.version}</version>-->
+<!--            </dependency>-->
             <!-- 验证码生成工具 -->
             <dependency>
                 <groupId>com.github.whvcse</groupId>

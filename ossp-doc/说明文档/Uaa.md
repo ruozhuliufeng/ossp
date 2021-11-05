@@ -92,7 +92,7 @@ spring:
   redis:
     database: 0
     host: localhost
-    port: 6379
+    port: 9169
     password: ''
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
@@ -109,7 +109,7 @@ mybatis-plus:
 - 5.输入密钥口
 
 ```text 
-keytool -genkey -alias zlt -keyalg RSA -storetype PKCS12 -keysize 1024 -keystore zlt.jks 
+keytool -genkey -alias ossp -keyalg RSA -storetype PKCS12 -keysize 1024 -keystore ossp.jks 
 ```
 - 参数解析
   - genkey：创建证书

@@ -8,15 +8,15 @@ spring:
 ossp:
   api-uaa:
     url: http://127.0.0.1:9900/api-uaa/oauth
-  logout-uri: ${ossp.api-uaa.url}/remove/token?redirect_uri=http://127.0.0.1:8080&access_token=
+  logout-uri: ${ossp.api-uaa.url}/remove/token?redirect_uri=http://localhost:8080&access_token=
 
 security:
   oauth2:
     sso:
       login-path: /singleLogin
     client:
-      client-id: zlt
-      client-secret: zlt
+      client-id: ossp
+      client-secret: ossp
       access-token-uri: ${ossp.api-uaa.url}/token
       user-authorization-uri: ${ossp.api-uaa.url}/authorize
     resource:
