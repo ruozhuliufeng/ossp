@@ -4,7 +4,8 @@
       <div class="grid-content bg-purple">
         <h2>欢迎使用OSSP一站式服务平台</h2>
         <el-image
-            style="height: 180px;weight:180px"
+            style="height: 180px;
+            weight:180px"
             :src="imgUrl"></el-image>
         <p>公众号：若竹流风</p>
         <p>关注公众号，加入开放平台</p>
@@ -14,7 +15,7 @@
       <el-divider direction="vertical">
       </el-divider>
     </el-col>
-    <el-col xl="6" :lg="7">
+    <el-col :xl="6" :lg="7">
       <el-form :model="loginForm" :rules="rules" ref="loginForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="用户名称" prop="username" style="width:380px">
           <el-input v-model="loginForm.username"></el-input>
@@ -64,12 +65,18 @@ export default {
   },
   methods:
       {
+        created() {
+          this.getCaptcha()
+        },
         submitForm(formName) {
           this.$refs[formName].validate((valid) => {
             if (valid) {
-              alert('submit!');
+              this.$axios.post("/login", this.loginForm).thren(res => {
+                const jwt = res.headers['authorization']
+                this.$store.commit('SET_TOKEN', jwt)
+                this.$router.push("/index")
+              })
             } else {
-              console.log('error submit!!');
               return false;
             }
           });
@@ -77,6 +84,14 @@ export default {
         ,
         resetForm(formName) {
           this.$refs[formName].resetFields();
+        },
+        getCaptcha() {
+          console.log("/captcha")
+          this.$axios.get("/captcha").then(res => {
+            console.log(res)
+            this.loginForm.token = res.data.data.token
+            this.captchaImg = res.data.data.captchaImg
+          })
         }
       }
 }
