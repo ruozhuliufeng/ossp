@@ -13,11 +13,13 @@ Mock.mock('/captcha','get',()=>{
 
     Result.data = {
         token:Random.string(32),
-        captchaImg:Random.dataImage('120x40','p7n5w')
+        captchaImg:Random.dataImage('100x40','p7n5w')
     }
     return Result
 })
 
 Mock.mock('/login','post',()=>{
+    Result.code =500
+    Result.msg = "验证码有误"
     return Result
 })

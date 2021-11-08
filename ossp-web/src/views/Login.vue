@@ -21,11 +21,11 @@
           <el-input v-model="loginForm.username"></el-input>
         </el-form-item>
         <el-form-item label="用户密码" prop="password" style="width:380px">
-          <el-input v-model="loginForm.password"></el-input>
+          <el-input v-model="loginForm.password" type="password"></el-input>
         </el-form-item>
         <el-form-item label="验证码" prop="code" style="width:380px">
           <el-input v-model="loginForm.code" style="width:172px;float: left"></el-input>
-          <el-image src="" class="captchaImg"></el-image>
+          <el-image @click="getCaptcha" :src="captchaImg" class="captchaImg"></el-image>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('loginForm')">立即创建</el-button>
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import qs from 'qs'
 export default {
   name: "Login",
   data() {
@@ -65,13 +66,10 @@ export default {
   },
   methods:
       {
-        created() {
-          this.getCaptcha()
-        },
         submitForm(formName) {
           this.$refs[formName].validate((valid) => {
             if (valid) {
-              this.$axios.post("/login", this.loginForm).thren(res => {
+              this.$axios.post("/login",this.loginForm).then(res => {
                 const jwt = res.headers['authorization']
                 this.$store.commit('SET_TOKEN', jwt)
                 this.$router.push("/index")
@@ -86,14 +84,16 @@ export default {
           this.$refs[formName].resetFields();
         },
         getCaptcha() {
-          console.log("/captcha")
-          this.$axios.get("/captcha").then(res => {
-            console.log(res)
+          this.$axios.get('/captcha').then(res => {
             this.loginForm.token = res.data.data.token
             this.captchaImg = res.data.data.captchaImg
+            this.loginForm.code = ''
           })
         }
-      }
+      },
+  created() {
+    this.getCaptcha()
+  },
 }
 </script>
 
