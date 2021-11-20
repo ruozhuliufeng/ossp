@@ -26,6 +26,7 @@
         </div>
       </el-header>
       <el-main>
+        <Tabs></Tabs>
         <router-view/>
       </el-main>
     </el-container>
@@ -33,6 +34,7 @@
 </template>
 
 <script>
+import Tabs from "@/views/inc/Tabs";
 import SideMenu from "@/views/inc/SideMenu";
 
 export default {
@@ -40,6 +42,7 @@ export default {
   // 声明组件
   components: {
     SideMenu,
+    Tabs,
   },
   data() {
     return {
@@ -53,14 +56,14 @@ export default {
   created() {
     this.getUserInfo()
   },
-  methods:{
-    getUserInfo(){
-      this.$axios.get("/sys/userInfo").then(res=>{
+  methods: {
+    getUserInfo() {
+      this.$axios.get("/sys/userInfo").then(res => {
         this.userInfo = res.data.data
       })
     },
-    logout(){
-      this.$axios.post("/logout").then(res=>{
+    logout() {
+      this.$axios.post("/logout").then(res => {
         // 清除登录信息
         localStorage.clear();
         sessionStorage.clear();
@@ -107,6 +110,7 @@ export default {
 
 .el-main {
   color: #333;
+  text-align: center;
   padding: 0;
 }
 

@@ -14,10 +14,7 @@ export default new Vuex.Store({
             state.token = token
             localStorage.setItem("token", token)
         },
-        // 清除登录信息
-        resetState: (state) => {
-            state.token = ''
-        }
+
     },
     actions: {},
     modules: {
