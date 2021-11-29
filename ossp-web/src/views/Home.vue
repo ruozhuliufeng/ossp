@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import Tabs from "@/views/inc/Tabs";
-import SideMenu from "@/views/inc/SideMenu";
+import Tabs from "@/views/include/Tabs";
+import SideMenu from "@/views/include/SideMenu";
 
 export default {
   name: "Home",

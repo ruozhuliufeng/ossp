@@ -31,5 +31,5 @@ hs_err_pid*
 **/.mvn
 **/test
 **/node_modules
-# 前端文件不在此处上传
-/ossp-web
+# 配置文件不上传
+/ossp-config/**

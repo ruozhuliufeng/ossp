@@ -44,6 +44,7 @@ import java.util.Set;
  **/
 @Slf4j
 @RestController
+@RequestMapping("/user")
 @Api(tags = "用户模块Api")
 public class SysUserController {
     private static final String ADMIN_CHANGE_MSG = "超级管理员不给予修改";
@@ -64,7 +65,7 @@ public class SysUserController {
      * @return LoginAppUser
      */
     @ApiOperation(value = "根据access_token查找当前用户")
-    @GetMapping("/users/current")
+    @GetMapping("/current")
     public Result<LoginAppUser> getLoginAppUser(@LoginUser(isFull = true) SysUser user) {
         return Result.succeed(userService.getLoginAppUser(user));
     }
@@ -77,7 +78,7 @@ public class SysUserController {
      */
     @ApiOperation(value = "根据用户名查询用户实体")
     @Cacheable(value = "user", key = "#username")
-    @GetMapping(value = "/users/name/{username}")
+    @GetMapping(value = "/name/{username}")
     public SysUser selectByUsername(@PathVariable String username) {
         return userService.selectByUsername(username);
     }
@@ -88,7 +89,7 @@ public class SysUserController {
      * @param username 用户名
      * @return 用户登录对象
      */
-    @GetMapping(value = "/users-anon/login", params = "username")
+    @GetMapping(value = "/anon/login", params = "username")
     @ApiOperation(value = "根据用户名查找用户")
     public LoginAppUser findByUsername(String username) {
         return userService.findByUsername(username);
@@ -100,7 +101,7 @@ public class SysUserController {
      * @param mobile 手机号
      * @return 用户信息
      */
-    @GetMapping(value = "/users-anon/mobile", params = "mobile")
+    @GetMapping(value = "/anon/mobile", params = "mobile")
     @ApiOperation(value = "根据手机号查询用户")
     public SysUser findByMobile(String mobile) {
         return userService.findByMobile(mobile);
@@ -112,13 +113,13 @@ public class SysUserController {
      * @param openId openId
      * @return 用户信息
      */
-    @GetMapping(value = "/users-anon/openId", params = "openId")
+    @GetMapping(value = "anon/openId", params = "openId")
     @ApiOperation(value = "根据OpenId查询用户")
     public SysUser findByOpenId(String openId) {
         return userService.findByOpenId(openId);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/{id}")
     public SysUser findByUserId(@PathVariable Long id) {
         return userService.getById(id);
     }
@@ -128,7 +129,7 @@ public class SysUserController {
      *
      * @param sysUser 用户信息
      */
-    @PutMapping("/users")
+    @PutMapping("/update")
     @CachePut(value = "user", key = "#sysUser.username", unless = "#result == null")
     @AuditLog(operation = "'更新用户:' + #sysUser")
     public void updateSysUser(@RequestBody SysUser sysUser) {
@@ -141,7 +142,7 @@ public class SysUserController {
      * @param id      用户id
      * @param roleIds 角色id集合
      */
-    @PostMapping("/users/{id}/roles")
+    @PostMapping("/{id}/roles")
     public void setRoleToUser(@PathVariable Long id, @RequestBody Set<Long> roleIds) {
         userService.setRoleToUser(id, roleIds);
     }
@@ -152,7 +153,7 @@ public class SysUserController {
      * @param id 用户id
      * @return 角色集合
      */
-    @GetMapping("/users/{id}/roles")
+    @GetMapping("/{id}/roles")
     public List<SysRole> findRolesByUserId(Long id) {
         return userService.findRolesByUserId(id);
     }
@@ -168,7 +169,7 @@ public class SysUserController {
             @ApiImplicitParam(name = "page", value = "分页起始位置", required = true, dataType = "Integer"),
             @ApiImplicitParam(name = "limit", value = "分页结束位置", required = true, dataType = "Integer")
     })
-    @GetMapping("/users")
+    @GetMapping("/list")
     public PageResult<SysUser> findUsers(@RequestParam Map<String, Object> params) {
         return userService.findUsers(params);
     }
@@ -178,7 +179,7 @@ public class SysUserController {
             @ApiImplicitParam(name = "id", value = "用户id", required = true, dataType = "Integer"),
             @ApiImplicitParam(name = "enabled", value = "是否启用", required = true, dataType = "Boolean"),
     })
-    @GetMapping("/users/updateEnabled")
+    @GetMapping("/update/enabled")
     public Result updateEnabled(Map<String, Object> params) {
         Long id = MapUtils.getLong(params, "id");
         if (checkAdmin(id)) {
@@ -193,9 +194,9 @@ public class SysUserController {
      * @param id 用户id
      * @return Result
      */
-    @PutMapping(value = "/user/{id}/password")
+    @PutMapping(value = "/{id}/password")
     @AuditLog(operation = "'重置用户密码:'+#id")
-    public Result resetPassword(Long id) {
+    public Result resetPassword(@PathVariable("id") Long id) {
         if (checkAdmin(id)) {
             return Result.failed(ADMIN_CHANGE_MSG);
         }
@@ -209,7 +210,7 @@ public class SysUserController {
      * @param sysUser 用户信息
      * @return Result
      */
-    @PutMapping(value = "/users/password")
+    @PutMapping(value = "/password")
     public Result resetPassword(SysUser sysUser) {
         if (checkAdmin(sysUser.getId())) {
             return Result.failed(ADMIN_CHANGE_MSG);
@@ -226,7 +227,7 @@ public class SysUserController {
      * @throws Exception 异常
      */
     @CacheEvict(value = "user", key = "#sysUser.username")
-    @PostMapping("/users/saveOrUpdate")
+    @PostMapping("/save")
     @AuditLog(operation = "'新增或更新用户:'+#sysUser.username")
     public Result saveOrUpdate(SysUser sysUser) throws Exception {
         return userService.saveOrUpdateUser(sysUser);
@@ -238,14 +239,14 @@ public class SysUserController {
      * @param response 返回
      * @throws IOException 导出异常
      */
-    @PostMapping("/users/export")
+    @PostMapping("/export")
     public void exportUser(@RequestParam Map<String,Object> params, HttpServletResponse response) throws IOException {
         List<SysUserExcel> result = userService.findAllUsers(params);
         // 导出操作
         ExcelUtil.exportExcel(result,null,"用户",SysUserExcel.class,"user",response);
     }
 
-    @PostMapping(value = "/users/import")
+    @PostMapping(value = "/import")
     public Result importExcel(@RequestParam("file") MultipartFile excel) throws Exception{
         int rowNum = 0;
         if (!excel.isEmpty()){
@@ -272,7 +273,7 @@ public class SysUserController {
             @ApiImplicitParam(name = "limit",value = "分页结束位置",required = true,dataType = "Integer"),
             @ApiImplicitParam(name = "queryStr",value = "搜索关键字",dataType = "String")
     })
-    @GetMapping("/users/search")
+    @GetMapping("/search")
     public PageResult<JsonNode> search(SearchDTO searchDTO){
         searchDTO.setIsHighlighter(true);
         searchDTO.setSortCol("createTime");

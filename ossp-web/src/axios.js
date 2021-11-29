@@ -18,6 +18,12 @@ const request = axios.create({
 request.interceptors.request.use(config=>{
     // 请求前携带jwt认证信息
     config.headers["Authorization"] = localStorage.getItem("token")
+    // 接口校验
+    // let nonce = uuid()
+    // let username = localStorage.getItem("username")
+    // let time = time()
+    // let sign = encrypt(username+"."+nonce+"."+time)
+    // config.headers["sign"] = sign
     return config
 })
 // 请求后置拦截 ==
