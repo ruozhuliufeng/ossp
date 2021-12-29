@@ -29,16 +29,19 @@ public class DubboTraceFilter implements Filter {
         if (isProviderSide){
             // 服务提供者逻辑
             String traceId = invocation.getAttachment(MDCTraceUtils.KEY_TRACE_ID);
+            String spanId = invocation.getAttachment(MDCTraceUtils.KEY_SPAN_ID);
             if (StringUtils.isEmpty(traceId)){
                 MDCTraceUtils.addTraceId();
             }else {
-                MDCTraceUtils.putTraceId(traceId);
+                MDCTraceUtils.putTraceId(traceId,spanId);
             }
         }else {
             // 服务消费者逻辑
             String traceId = MDCTraceUtils.getTraceId();
             if (!StringUtils.isEmpty(traceId)){
-                invocation.setAttachment(MDCTraceUtils.KEY_TRACE_ID,traceId);;
+                String spanId = MDCTraceUtils.getSpanId();
+                invocation.setAttachment(MDCTraceUtils.KEY_TRACE_ID,traceId);
+                invocation.setAttachment(MDCTraceUtils.KEY_SPAN_ID,spanId);
             }
         }
         try {

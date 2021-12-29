@@ -38,9 +38,10 @@ public class SysMenuServiceImpl extends SuperServiceImpl<SysMenuMapper, SysMenu>
 
     @Override
     public List<SysMenu> findAll() {
-        return baseMapper.selectList(
-                new QueryWrapper<SysMenu>().orderByAsc("sort")
-        );
+        return list();
+//        return baseMapper.selectList(
+//                new QueryWrapper<SysMenu>().orderByAsc("sort")
+//        );
     }
 
     /**

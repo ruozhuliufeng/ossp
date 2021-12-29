@@ -4,6 +4,7 @@ import cn.aixuxi.ossp.common.log.model.Audit;
 import cn.aixuxi.ossp.common.log.service.IAuditService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.stereotype.Service;
 
 import java.time.format.DateTimeFormatter;
 
@@ -13,6 +14,7 @@ import java.time.format.DateTimeFormatter;
  * @date 2021-07-17
  */
 @Slf4j
+@Service
 @ConditionalOnProperty(name = "ossp-audit-log.log-type",havingValue = "logger",matchIfMissing = true)
 public class LoggerAuditServiceImpl implements IAuditService {
 

@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
@@ -21,6 +22,7 @@ import javax.sql.DataSource;
  * @date 2021-07-17
  */
 @Slf4j
+@Service
 @ConditionalOnClass(JdbcTemplate.class)
 @ConditionalOnProperty(name = "ossp.audit-log.lot-type",havingValue ="db")
 public class DbAuditServiceImpl implements IAuditService {

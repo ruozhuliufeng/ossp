@@ -2,6 +2,7 @@ package cn.aixuxi.ossp.gateway.filter;
 
 import cn.aixuxi.ossp.common.constant.CommonConstant;
 import cn.aixuxi.ossp.common.log.properties.TraceProperties;
+import cn.aixuxi.ossp.common.log.trace.MDCTraceUtils;
 import cn.hutool.core.util.IdUtil;
 import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +29,12 @@ public class TraceFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         if (traceProperties.getEnable()){
             // 链路追踪id
-            String traceId = IdUtil.fastSimpleUUID();
-            MDC.put(CommonConstant.LOG_TRACE_ID,traceId);
+            MDCTraceUtils.addTraceId();
             ServerHttpRequest serverHttpRequest = exchange.getRequest().mutate()
-                    .headers(h->h.add(CommonConstant.TRACE_ID_HEADER,traceId))
+                    .headers(h -> {
+                            h.add(MDCTraceUtils.TRACE_ID_HEADER,MDCTraceUtils.getTraceId());
+                            h.add(MDCTraceUtils.SPAN_ID_HEADER,MDCTraceUtils.getTraceId());
+                    })
                     .build();
             ServerWebExchange build = exchange.mutate().request(serverHttpRequest).build();
             return chain.filter(build);

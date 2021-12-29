@@ -14,14 +14,14 @@
 * Rap地址：[http://rap2.taobao.org/repository/editor?id=293861&mod=487739&itf=2134607](http://rap2.taobao.org/repository/editor?id=293861&mod=487739&itf=2134607)
 * 请求接口格式：
 
-```matlab
+```lua
 ├─ page: Number (必选) (页数 分页参数)
 └─ limit: Number (必选) (每页限制数量)
 ```
 
 * 返回接口格式：
 
-```
+```lua
 ├─ code: Number  (返回编码)
 ├─ msg: String  (返回说明)
 └─ data: Array 

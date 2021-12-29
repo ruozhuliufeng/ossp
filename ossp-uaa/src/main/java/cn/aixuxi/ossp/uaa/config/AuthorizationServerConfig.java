@@ -10,6 +10,7 @@ import cn.aixuxi.ossp.uaa.service.IClientService;
 import cn.aixuxi.ossp.uaa.service.impl.RedisClientDetailsService;
 import cn.aixuxi.ossp.uaa.service.impl.UserDetailServiceFactory;
 import cn.aixuxi.ossp.uaa.utils.OidcIdTokenBuilder;
+import cn.hutool.core.util.StrUtil;
 import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -120,7 +121,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
             Set<String> responseTypes = authentication.getOAuth2Request().getResponseTypes();
             Map<String, Object> additionalInfo = new HashMap<>(3);
             String accountType = AuthUtils.getAccountType(authentication.getUserAuthentication());
-            additionalInfo.put(SecurityConstants.ACCOUNT_TYPE_PARAM_NAME,accountType);
+            if (StrUtil.isNotEmpty(accountType)) {
+                additionalInfo.put(SecurityConstants.ACCOUNT_TYPE_PARAM_NAME, accountType);
+            }
             if (responseTypes.contains(SecurityConstants.ID_TOKEN)
                     || "authJwt".equals(tokenStoreProperties.getType())) {
                 Object principal = authentication.getPrincipal();
@@ -157,7 +160,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                             SysUser user) {
         String clientId = authentication.getOAuth2Request().getClientId();
         Client client = clientService.loadClientByClientId(clientId);
-        if (client.getSupportIdToken()){
+        if (client.getSupportIdToken()) {
             String nonce = authentication.getOAuth2Request().getRequestParameters().get(IdTokenClaimNames.NONCE);
             long now = System.currentTimeMillis();
             long expireAt = System.currentTimeMillis() + client.getIdTokenValiditySeconds() * 1000;
@@ -172,7 +175,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                     .audience(clientId)
                     .nonce(nonce)
                     .build();
-            additionalInfo.put(SecurityConstants.ID_TOKEN,idToken);
+            additionalInfo.put(SecurityConstants.ID_TOKEN, idToken);
         }
     }
 

@@ -7,6 +7,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.security.jwt.Jwt;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import sun.misc.BASE64Encoder;
+
+import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.interfaces.RSAPublicKey;
 import java.util.*;
@@ -29,6 +32,7 @@ import java.util.*;
  * @author ruozhuliufeng
  */
 @RestController
+@Slf4j
 public class ApiController {
     private static final String PUBKEY_START = "-----BEGIN PUBLIC KEY-----";
     private static final String PUBKEY_END = "-----END PUBLIC KEY-----";
@@ -63,6 +67,8 @@ public class ApiController {
      */
     private final static ThreadLocal<String> NONCE = new ThreadLocal<>();
 
+    private final static Map<String,MyUser> localTokenMap = new HashMap<>();
+
     @GetMapping("/token/{code}")
     public Map<String, Object> tokenInfo(@PathVariable String code) throws Exception {
         //获取token
@@ -78,7 +84,8 @@ public class ApiController {
         if (!userDb.containsKey(user.getId())) {
             userDb.put(user.getId(), user);
         }
-
+        String accessToken = (String) tokenMap.get("access_token");
+        localTokenMap.put(accessToken,user);
         Map<String, Object> result = new HashMap<>(2);
         result.put("tokenInfo", tokenMap);
         result.put("userInfo", user);
@@ -103,6 +110,20 @@ public class ApiController {
         Assert.isTrue((StrUtil.isEmpty(nonce) || nonce.equals(NONCE.get())), "nonce参数无效");
     }
 
+    public void logoutNotify(HttpServletRequest request){
+        String tokens = request.getParameter("tokens");
+        log.info("=====logoutNotify:"+tokens);
+        if (StrUtil.isNotBlank(tokens)){
+            for (String accessToken : tokens.split(",")){
+                localTokenMap.remove(accessToken);
+            }
+        }
+    }
+    @GetMapping("/user")
+    public MyUser user(HttpServletRequest request){
+        String token = request.getParameter("access_token");
+        return localTokenMap.get(token);
+    }
     /**
      * 获取token
      */
@@ -117,7 +138,7 @@ public class ApiController {
         param.add("code", code);
         param.add("grant_type", "authorization_code");
         param.add("redirect_uri", redirectUri);
-        param.add("scope", "app");
+        param.add("scope", "all");
         param.add("nonce", this.genNonce());
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(param, headers);
         ResponseEntity<Map> response = restTemplate.postForEntity(accessTokenUri, request , Map.class);

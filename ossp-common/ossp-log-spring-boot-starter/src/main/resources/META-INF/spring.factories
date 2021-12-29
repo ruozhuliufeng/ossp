@@ -2,9 +2,4 @@ org.springframework.context.ApplicationContextInitializer=\
 cn.aixuxi.ossp.common.log.config.TtlMDCAdapterInitializer
 
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-cn.aixuxi.ossp.common.log.config.LogAutoConfigure,\
-cn.aixuxi.ossp.common.log.service.impl.DbAuditServiceImpl,\
-cn.aixuxi.ossp.common.log.service.impl.LoggerAuditServiceImpl,\
-cn.aixuxi.ossp.common.log.aspect.AuditLogAspect,\
-cn.aixuxi.ossp.common.log.trace.WebTraceFilter,\
-cn.aixuxi.ossp.common.log.trace.FeignTraceInterceptor
+cn.aixuxi.ossp.common.log.LogAutoConfigure

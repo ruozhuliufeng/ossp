@@ -62,6 +62,10 @@ public class SysMenu extends BaseEntity{
      * 请求的类型
      */
     private String pathMethod;
+    /**
+     * 租户字段
+     */
+    private String tenantId;
 
     /**
      * 上级菜单集合

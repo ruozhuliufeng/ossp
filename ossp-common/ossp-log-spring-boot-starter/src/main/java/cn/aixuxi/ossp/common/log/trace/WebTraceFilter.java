@@ -4,6 +4,7 @@ import cn.aixuxi.ossp.common.log.properties.TraceProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.annotation.Resource;
@@ -19,6 +20,7 @@ import java.io.IOException;
  * @date 2021-07-17
  * 注解注释：@Order 排序，值越低越靠前
  */
+@Component
 @ConditionalOnClass(value = {HttpServletRequest.class, OncePerRequestFilter.class})
 @Order(value = MDCTraceUtils.FILTER_ORDER)
 public class WebTraceFilter extends OncePerRequestFilter{
@@ -38,10 +40,11 @@ public class WebTraceFilter extends OncePerRequestFilter{
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         try {
             String traceId = httpServletRequest.getHeader(MDCTraceUtils.TRACE_ID_HEADER);
+            String spanId = httpServletRequest.getHeader(MDCTraceUtils.SPAN_ID_HEADER);
             if (StringUtils.isEmpty(traceId)){
                 MDCTraceUtils.addTraceId();
             }else {
-                MDCTraceUtils.putTraceId(traceId);
+                MDCTraceUtils.putTraceId(traceId,spanId);
             }
             filterChain.doFilter(httpServletRequest,httpServletResponse);
         }finally {
