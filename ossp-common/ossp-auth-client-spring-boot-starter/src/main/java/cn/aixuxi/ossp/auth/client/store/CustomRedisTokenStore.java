@@ -1,8 +1,7 @@
 package cn.aixuxi.ossp.auth.client.store;
 
-import cn.aixuxi.ossp.auth.client.properties.SecurityPropertis;
+import cn.aixuxi.ossp.auth.client.properties.SecurityProperties;
 import cn.aixuxi.ossp.common.constant.SecurityConstants;
-import org.springframework.cglib.core.ReflectUtils;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -22,7 +21,6 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
 import org.springframework.util.ClassUtils;
 import org.springframework.util.ReflectionUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -54,14 +52,14 @@ public class CustomRedisTokenStore implements TokenStore {
     private String prefix = "";
     private Method redisConnetciontSet_2_0;
 
-    private SecurityPropertis securityPropertis;
+    private SecurityProperties securityProperties;
 
     private RedisSerializer<Object> redisSerializer;
 
-    public CustomRedisTokenStore(RedisConnectionFactory connectionFactory, SecurityPropertis securityPropertis,
+    public CustomRedisTokenStore(RedisConnectionFactory connectionFactory, SecurityProperties securityProperties,
                                  RedisSerializer<Object> redisSerializer) {
         this.connectionFactory = connectionFactory;
-        this.securityPropertis = securityPropertis;
+        this.securityProperties = securityProperties;
         this.redisSerializer = redisSerializer;
         if (springDataRedis_2_0) {
             this.loadRedisConnectionMethods_2_0();
@@ -204,7 +202,7 @@ public class CustomRedisTokenStore implements TokenStore {
     public OAuth2Authentication readAuthentication(OAuth2AccessToken token) {
         OAuth2Authentication auth2Authentication = readAuthentication(token.getValue());
         // 是否开启token续签
-        boolean isRenew = securityPropertis.getAuth().getRenew().getEnable();
+        boolean isRenew = securityProperties.getAuth().getRenew().getEnable();
         if (isRenew && auth2Authentication != null) {
             OAuth2Request clientAuth = auth2Authentication.getOAuth2Request();
             // 判断当前应用是否需要自动续签
@@ -214,7 +212,7 @@ public class CustomRedisTokenStore implements TokenStore {
                 if (validitySeconds > 0) {
                     double expiresRatio = token.getExpiresIn() / (double) validitySeconds;
                     // 判断是否需要续签，当前剩余时间小于过期时长的50%则续签(配置文件中配置)
-                    if (expiresRatio <= securityPropertis.getAuth().getRenew().getTimeRatio()) {
+                    if (expiresRatio <= securityProperties.getAuth().getRenew().getTimeRatio()) {
                         // 更新AccessToken过期时间
                         DefaultOAuth2AccessToken oAuth2AccessToken = (DefaultOAuth2AccessToken) token;
                         oAuth2AccessToken.setExpiration(new Date(System.currentTimeMillis() + (validitySeconds * 1000L)));
@@ -419,9 +417,9 @@ public class CustomRedisTokenStore implements TokenStore {
     private boolean checkRenewClientId(String clientId) {
         boolean result = true;
         // 白名单
-        List<String> includeClientIds = securityPropertis.getAuth().getRenew().getIncludeClientIds();
+        List<String> includeClientIds = securityProperties.getAuth().getRenew().getIncludeClientIds();
         // 黑名单
-        List<String> exclusiveClientIds = securityPropertis.getAuth().getRenew().getExclusiveClientIds();
+        List<String> exclusiveClientIds = securityProperties.getAuth().getRenew().getExclusiveClientIds();
         if (includeClientIds.size() > 0) {
             result = includeClientIds.contains(clientId);
         } else if (exclusiveClientIds.size() > 0) {

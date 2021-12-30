@@ -1,6 +1,6 @@
 package cn.aixuxi.ossp.gateway.config;
 
-import cn.aixuxi.ossp.auth.client.properties.SecurityPropertis;
+import cn.aixuxi.ossp.auth.client.properties.SecurityProperties;
 import cn.aixuxi.ossp.gateway.auth.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +26,7 @@ import org.springframework.security.web.server.authentication.ServerAuthenticati
 public class ResourceServerConfiguration {
 
     @Autowired
-    private SecurityPropertis securityPropertis;
+    private SecurityProperties securityProperties;
     @Autowired
     private TokenStore tokenStore;
     @Autowired
@@ -47,11 +47,11 @@ public class ResourceServerConfiguration {
         oauth2Filter.setAuthenticationSuccessHandler(new Oauth2AuthSuccessHandler());
         http.addFilterAt(oauth2Filter, SecurityWebFiltersOrder.AUTHENTICATION);
         ServerHttpSecurity.AuthorizeExchangeSpec authorizeExchange = http.authorizeExchange();
-        if (securityPropertis.getAuth().getHttpUrls().length > 0) {
-            authorizeExchange.pathMatchers(securityPropertis.getAuth().getHttpUrls()).authenticated();
+        if (securityProperties.getAuth().getHttpUrls().length > 0) {
+            authorizeExchange.pathMatchers(securityProperties.getAuth().getHttpUrls()).authenticated();
         }
-        if (securityPropertis.getIgnore().getUrls().length > 0) {
-            authorizeExchange.pathMatchers(securityPropertis.getIgnore().getUrls()).permitAll();
+        if (securityProperties.getIgnore().getUrls().length > 0) {
+            authorizeExchange.pathMatchers(securityProperties.getIgnore().getUrls()).permitAll();
         }
         authorizeExchange
                 .pathMatchers(HttpMethod.OPTIONS).permitAll()

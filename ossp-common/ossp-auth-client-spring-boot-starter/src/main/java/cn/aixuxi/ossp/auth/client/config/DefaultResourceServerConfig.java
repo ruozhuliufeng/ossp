@@ -1,8 +1,6 @@
 package cn.aixuxi.ossp.auth.client.config;
 
-import cn.aixuxi.ossp.auth.client.properties.SecurityPropertis;
-import cn.aixuxi.ossp.auth.client.properties.TokenStoreProperties;
-import jdk.nashorn.internal.ir.annotations.Immutable;
+import cn.aixuxi.ossp.auth.client.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
@@ -40,7 +38,7 @@ public class DefaultResourceServerConfig extends ResourceServerConfigurerAdapter
     private OAuth2AccessDeniedHandler oAuth2AccessDeniedHandler;
 
     @Autowired
-    private SecurityPropertis securityPropertis;
+    private SecurityProperties securityProperties;
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -56,7 +54,7 @@ public class DefaultResourceServerConfig extends ResourceServerConfigurerAdapter
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.AuthorizedUrl authorizedUrl = setHttp(http)
                 .authorizeRequests()
                 // 放行无需认证的访问地址
-                .antMatchers(securityPropertis.getIgnore().getUrls()).permitAll()
+                .antMatchers(securityProperties.getIgnore().getUrls()).permitAll()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
                 .anyRequest();
         setAuthenticate(authorizedUrl);

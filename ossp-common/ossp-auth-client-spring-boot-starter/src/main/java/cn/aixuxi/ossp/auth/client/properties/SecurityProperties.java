@@ -12,7 +12,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 @Getter
 @RefreshScope
 @ConfigurationProperties(prefix = "ossp.security")
-public class SecurityPropertis {
+public class SecurityProperties {
     private AuthProperties auth = new AuthProperties();
 
     private PermitProperties ignore = new PermitProperties();

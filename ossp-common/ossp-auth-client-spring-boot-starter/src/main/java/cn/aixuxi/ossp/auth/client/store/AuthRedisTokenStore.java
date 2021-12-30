@@ -1,6 +1,6 @@
 package cn.aixuxi.ossp.auth.client.store;
 
-import cn.aixuxi.ossp.auth.client.properties.SecurityPropertis;
+import cn.aixuxi.ossp.auth.client.properties.SecurityProperties;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,8 +24,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 public class AuthRedisTokenStore {
 
     @Bean
-    public TokenStore tokenStore(RedisConnectionFactory connectionFactory, SecurityPropertis securityPropertis,
+    public TokenStore tokenStore(RedisConnectionFactory connectionFactory, SecurityProperties securityProperties,
                                  RedisSerializer<Object> redisSerializer){
-        return new CustomRedisTokenStore(connectionFactory,securityPropertis,redisSerializer);
+        return new CustomRedisTokenStore(connectionFactory, securityProperties,redisSerializer);
     }
 }

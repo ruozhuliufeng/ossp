@@ -2,6 +2,7 @@ package cn.aixuxi.ossp.uaa.config;
 
 import cn.aixuxi.ossp.uaa.exception.ValidateCodeException;
 import cn.aixuxi.ossp.uaa.handler.OauthLogoutHandler;
+import cn.aixuxi.ossp.uaa.handler.OauthLogoutSuccessHandler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,8 @@ import org.springframework.security.oauth2.provider.error.DefaultWebResponseExce
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -32,8 +35,11 @@ import java.io.IOException;
 public class SecurityHandlerConfig {
 
     @Bean
-    public OauthLogoutHandler oauthLogoutHandler(){
+    public LogoutHandler logoutHandler(){
         return new OauthLogoutHandler();
+    }
+
+    public LogoutSuccessHandler logoutSuccessHandler(){return new OauthLogoutSuccessHandler();
     }
 
     @Bean

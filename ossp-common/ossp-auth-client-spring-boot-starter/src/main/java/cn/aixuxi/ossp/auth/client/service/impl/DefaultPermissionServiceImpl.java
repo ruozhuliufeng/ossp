@@ -1,6 +1,6 @@
 package cn.aixuxi.ossp.auth.client.service.impl;
 
-import cn.aixuxi.ossp.auth.client.properties.SecurityPropertis;
+import cn.aixuxi.ossp.auth.client.properties.SecurityProperties;
 import cn.aixuxi.ossp.auth.client.util.AuthUtils;
 import cn.aixuxi.ossp.common.constant.CommonConstant;
 import cn.aixuxi.ossp.common.context.TenantContextHolder;
@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public abstract class DefaultPermissionServiceImpl {
     @Autowired
-    private SecurityPropertis propertis;
+    private SecurityProperties propertis;
 
     private final AntPathMatcher antPathMatcher = new AntPathMatcher();
 
