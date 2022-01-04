@@ -89,7 +89,7 @@ public class SysUserController {
      * @param username 用户名
      * @return 用户登录对象
      */
-    @GetMapping(value = "/anon/login", params = "username")
+    @GetMapping(value = "/login/username", params = "username")
     @ApiOperation(value = "根据用户名查找用户")
     public LoginAppUser findByUsername(String username) {
         return userService.findByUsername(username);
@@ -101,7 +101,7 @@ public class SysUserController {
      * @param mobile 手机号
      * @return 用户信息
      */
-    @GetMapping(value = "/anon/mobile", params = "mobile")
+    @GetMapping(value = "/login/mobile", params = "mobile")
     @ApiOperation(value = "根据手机号查询用户")
     public SysUser findByMobile(String mobile) {
         return userService.findByMobile(mobile);
@@ -113,7 +113,7 @@ public class SysUserController {
      * @param openId openId
      * @return 用户信息
      */
-    @GetMapping(value = "anon/openId", params = "openId")
+    @GetMapping(value = "/login/openId", params = "openId")
     @ApiOperation(value = "根据OpenId查询用户")
     public SysUser findByOpenId(String openId) {
         return userService.findByOpenId(openId);

@@ -156,7 +156,7 @@ public class TokenGranterConfig {
 
     @Bean
     @ConditionalOnMissingBean
-    protected AuthorizationServerTokenServices createDefaultTokenServices() {
+    protected DefaultTokenServices createDefaultTokenServices() {
         DefaultTokenServices tokenServices = new CustomTokenService(isSingleLogin);
         tokenServices.setTokenStore(tokenStore);
         tokenServices.setSupportRefreshToken(true);

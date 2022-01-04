@@ -30,7 +30,7 @@ public interface UserService {
      * @param username 用户名
      * @return LoginAppUser
      */
-    @GetMapping(value = "/users-anon/login",params = "username")
+    @GetMapping(value = "/user/login/username",params = "username")
     LoginAppUser findByUsername(@RequestParam("username") String username);
 
     /**
@@ -38,7 +38,7 @@ public interface UserService {
      * @param mobile 手机号
      * @return LoginAppUser
      */
-    @GetMapping(value = "/users-anon/mobile",params = "mobile")
+    @GetMapping(value = "/user/login/mobile",params = "mobile")
     LoginAppUser findByMobile(@RequestParam("mobile") String mobile);
 
     /**
@@ -46,6 +46,6 @@ public interface UserService {
      * @param openId openId
      * @return LoginAppUser
      */
-    @GetMapping(value = "/users-anon/openId",params = "openId")
+    @GetMapping(value = "/user/login/openId",params = "openId")
     LoginAppUser findByOpenId(@RequestParam("openId") String openId);
 }

@@ -39,6 +39,7 @@ public class SecurityHandlerConfig {
         return new OauthLogoutHandler();
     }
 
+    @Bean
     public LogoutSuccessHandler logoutSuccessHandler(){return new OauthLogoutSuccessHandler();
     }
 

@@ -47,11 +47,11 @@ public class Client extends BaseEntity {
     /**
      * 授权类型
      */
-    private String authorizeGrantTypes = "authorization_code,password,refresh_token,client_credentials";
+    private String authorizedGrantTypes = "authorization_code,password,refresh_token,client_credentials";
     /**
      * 回调地址
      */
-    private String webServiceRedirectUri;
+    private String webServerRedirectUri;
     /**
      * 授权信息
      */
